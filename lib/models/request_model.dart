@@ -38,4 +38,6 @@ class RequestModel {
     machineType = json['machineType'];
     consultation = json['consultation'];
   }
+
+
 }

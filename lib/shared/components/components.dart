@@ -178,14 +178,14 @@ Color? chooseToastColor(ToastStates state) {
 
 Widget customListTile({
   required VoidCallback onTapped,
-  required String title,
+  required Widget title,
   Widget? leadingWidget,
   Widget? trailingWidget,
 }) {
   return InkWell(
     onTap: onTapped,
     child: ListTile(
-      title: Text(title),
+      title: title,
       leading: leadingWidget,
       trailing: trailingWidget,
     ),

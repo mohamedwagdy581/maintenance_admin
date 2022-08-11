@@ -5,7 +5,6 @@ import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/network/cubit/cubit.dart';
 import '../../style/custom_icons.dart';
-import '../about_us/about_us_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -26,12 +25,12 @@ class SettingsScreen extends StatelessWidget {
             context: context,
             onTap: ()
             {
-              navigateTo(context, const AboutUsScreen());
+              //navigateTo(context, const AboutUsScreen());
             },
-            prefixIcon: Icons.person,
+            prefixIcon: Icons.history_outlined,
             suffixIcon: CustomIcons.chevron_right,
-            title: 'About us',
-            subTitle: 'contact with us to solve your problem',
+            title: 'History',
+            subTitle: 'See All Requests history',
           ),
 
           SizedBox(

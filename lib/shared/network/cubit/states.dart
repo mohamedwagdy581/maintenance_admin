@@ -18,27 +18,18 @@ class AppGetUserErrorState extends AppStates
   AppGetUserErrorState(this.error);
 }
 
-// App Get All User State
-class AppGetAllUserLoadingState extends AppStates {}
+// App Get All Document IDs State
+class AppGetDocIDsLoadingState extends AppStates {}
 
-class AppGetAllUserSuccessState extends AppStates {}
+class AppGetDocIDsSuccessState extends AppStates {}
 
-class AppGetAllUserErrorState extends AppStates
+class AppGetDocIDsErrorState extends AppStates
 {
   final String error;
 
-  AppGetAllUserErrorState(this.error);
+  AppGetDocIDsErrorState(this.error);
 }
 
 // Change Mode Theme of App
 class AppChangeModeThemeState extends AppStates {}
 
-// Profile Image Picked States
-class AppProfileImagePickedSuccessState extends AppStates {}
-
-class AppProfileImagePickedErrorState extends AppStates {}
-
-// Cover Image Picked States
-class AppCoverImagePickedSuccessState extends AppStates {}
-
-class AppCoverImagePickedErrorState extends AppStates {}

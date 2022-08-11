@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../modules/about_us/about_us_screen.dart';
 import '../modules/login/login_screen.dart';
+import '../modules/requests/all_requests.dart';
 import '../shared/components/components.dart';
 import '../shared/components/constants.dart';
 import '../shared/network/cubit/cubit.dart';
@@ -49,13 +49,14 @@ class HomeLayout extends StatelessWidget {
                       backgroundColor: Colors.deepOrange,
                     ),
                   ),
-                  currentAccountPicture: cubit.profileImageUrl == ''
+                  currentAccountPicture: Image.network('https://icons-for-free.com/iconfiles/png/512/person-1324760545186718018.png'),
+                  /*cubit.profileImageUrl == ''
                       ? Image.network('https://icons-for-free.com/iconfiles/png/512/person-1324760545186718018.png')
                       : CircleAvatar(
                       backgroundImage: NetworkImage(
                           cubit.profileImageUrl,
                       ),
-                  ),
+                  ),*/
                   decoration: const BoxDecoration(
                       color: Colors.blue,
                   ),
@@ -89,7 +90,7 @@ class HomeLayout extends StatelessWidget {
                 InkWell(
                   onTap: ()
                   {
-                    navigateTo(context, const AboutUsScreen());
+                    navigateTo(context, AllRequestsScreen());
                   },
                   child: const ListTile(
                     title: Text('About'),
