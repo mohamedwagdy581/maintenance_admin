@@ -47,199 +47,49 @@ class RequestDetails extends StatelessWidget {
               children: [
                 TableRow(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Company Name',
-                            style:
-                                Theme.of(context).textTheme.bodyText1?.copyWith(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          requestCompanyName,
-                        ],
-                      ),
+                    customTableKeyCell(text: 'Company Name', context: context),
+                    customTableValueCell(
+                      widget: requestCompanyName,
                     ),
                   ],
                 ),
                 TableRow(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            'City',
-                            style:
-                                Theme.of(context).textTheme.bodyText1?.copyWith(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          requestCompanyCity,
-                        ],
-                      ),
+                    customTableKeyCell(text: 'City', context: context),
+                    customTableValueCell(
+                      widget: requestCompanyCity,
                     ),
                   ],
                 ),
                 TableRow(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            'School',
-                            style:
-                                Theme.of(context).textTheme.bodyText1?.copyWith(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          requestCompanySchool,
-                        ],
-                      ),
+                    customTableKeyCell(text: 'School', context: context),
+                    customTableValueCell(
+                      widget: requestCompanySchool,
                     ),
                   ],
                 ),
                 TableRow(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Machine',
-                            style:
-                                Theme.of(context).textTheme.bodyText1?.copyWith(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          requestCompanyMachine,
-                        ],
-                      ),
+                    customTableKeyCell(text: 'Machine', context: context),
+                    customTableValueCell(
+                      widget: requestCompanyMachine,
                     ),
                   ],
                 ),
                 TableRow(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Machine Type',
-                            style:
-                                Theme.of(context).textTheme.bodyText1?.copyWith(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          requestCompanyMachineType,
-                        ],
-                      ),
+                    customTableKeyCell(text: 'Machine Type', context: context),
+                    customTableValueCell(
+                      widget: requestCompanyMachineType,
                     ),
                   ],
                 ),
                 TableRow(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Consultation',
-                            style:
-                                Theme.of(context).textTheme.bodyText1?.copyWith(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 8.0,
-                      ),
-                      child: Column(
-                        children: [
-                          requestCompanyConsultation,
-                        ],
-                      ),
+                    customTableKeyCell(text: 'Consultation', context: context),
+                    customTableValueCell(
+                      widget: requestCompanyConsultation,
                     ),
                   ],
                 ),
@@ -253,45 +103,23 @@ class RequestDetails extends StatelessWidget {
             spacing: 20.0, // gap between adjacent chips
             runSpacing: 10.0, // gap between lines
             children: [
-              GestureDetector(
-                onTap: (){},
-                child: const Chip(
-                  backgroundColor: Colors.green,
-                  elevation: 20.0,
-                  avatar: Icon(
-                    Icons.done,
-                    color: Colors.blue,
-                  ),
-                  label: Text(
-                    'Done',
-                  ),
-                ),
+              customRequestAction(
+                onTap: () {},
+                backgroundColor: Colors.green,
+                icon: Icons.done,
+                label: 'Done',
               ),
-              GestureDetector(
-                onTap: (){},
-                child: const Chip(
-                  elevation: 20.0,
-                  avatar: Icon(
-                    Icons.archive_outlined,
-                  ),
-                  label: Text(
-                    'Archive',
-                  ),
-                ),
+              customRequestAction(
+                onTap: () {},
+                backgroundColor: Colors.grey,
+                icon: Icons.archive_outlined,
+                label: 'Archive',
               ),
-              GestureDetector(
-                onTap: ()
-                {},
-                child: const Chip(
-                  elevation: 20.0,
-                  backgroundColor: Colors.red,
-                  avatar: Icon(
-                    Icons.delete_forever,
-                  ),
-                  label: Text(
-                    'Delete',
-                  ),
-                ),
+              customRequestAction(
+                onTap: () {},
+                backgroundColor: Colors.red,
+                icon: Icons.delete_forever,
+                label: 'Delete',
               ),
             ],
           )
@@ -299,4 +127,63 @@ class RequestDetails extends StatelessWidget {
       ),
     );
   }
+
+  Widget customTableKeyCell({
+    required String text,
+    required context,
+  }) =>
+      Container(
+        alignment: Alignment.centerLeft,
+        margin: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 20.0,
+        ),
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                fontSize: 20.0,
+                fontWeight: FontWeight.normal,
+              ),
+        ),
+      );
+
+  Widget customTableValueCell({
+    required Widget widget,
+  }) =>
+      Container(
+        alignment: Alignment.centerLeft,
+        margin: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 20.0,
+        ),
+        child: Column(
+          children: [
+            widget,
+          ],
+        ),
+      );
+
+  Widget customRequestAction({
+    required VoidCallback onTap,
+    required Color backgroundColor,
+    required IconData icon,
+    required String label,
+  }) =>
+      GestureDetector(
+        onTap: onTap,
+        child: Chip(
+          elevation: 20.0,
+          backgroundColor: backgroundColor,
+          avatar: Icon(
+            icon,
+            color: Colors.white,
+          ),
+          label: Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      );
 }

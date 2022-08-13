@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/network/cubit/cubit.dart';
-import '../../style/custom_icons.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -15,84 +14,93 @@ class SettingsScreen extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        children: [
-          SizedBox(
-            height: height * 0.033,
-          ),
-
-          Container(
-            padding: const EdgeInsets.only(left: 20.0,bottom: 10.0),
-            alignment: Alignment.topLeft,
-            child: Text(
-              'Name : ${user!.displayName.toString()}',
-              style: Theme.of(context).textTheme.bodyText1,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+            'Settings Screen',
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            SizedBox(
+              height: height * 0.033,
             ),
-          ),
 
-          SizedBox(
-            height: height * 0.033,
-          ),
-
-          Container(
-            padding: const EdgeInsets.only(left: 20.0,bottom: 20.0,),
-            alignment: Alignment.topLeft,
+            Container(
+              padding: const EdgeInsets.only(left: 20.0,bottom: 10.0),
+              alignment: Alignment.topLeft,
               child: Text(
-            'Email : ${user.email.toString()}',
+                'Name : ${user!.displayName.toString()}',
                 style: Theme.of(context).textTheme.bodyText1,
-          )),
-
-          SizedBox(
-            height: height * 0.033,
-          ),
-
-          customListTile(
-            context: context,
-            onTap: () {
-              //navigateTo(context, const AboutUsScreen());
-            },
-            prefixIcon: Icons.history_outlined,
-            suffixIcon: CustomIcons.chevron_right,
-            title: 'History',
-            subTitle: 'See All Requests history',
-          ),
-
-          SizedBox(
-            height: height * 0.033,
-          ),
-          customListTile(
-            context: context,
-            onTap: () {
-              AppCubit.get(context).changeAppModeTheme();
-            },
-            prefixIcon: Icons.brightness_4_outlined,
-            suffixIcon: AppCubit.get(context).isDark
-                ? CustomIcons.moon
-                : CustomIcons.sun,
-            title: AppCubit.get(context).isDark ? 'Light' : 'Dark',
-            subTitle: 'Click to Switch Theme',
-          ),
-
-          SizedBox(
-            height: height * 0.05,
-          ),
-
-          // Logout Button
-          SizedBox(
-            width: width * 0.4,
-            child: defaultButton(
-              onPressed: () {
-                signOut(context);
-              },
-              text: 'LOGOUT',
-              backgroundColor: AppCubit.get(context).isDark
-                  ? Colors.blue
-                  : Colors.deepOrange,
+              ),
             ),
-          ),
-        ],
+
+            SizedBox(
+              height: height * 0.033,
+            ),
+
+            Container(
+                padding: const EdgeInsets.only(left: 20.0,bottom: 20.0,),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Email : ${user.email.toString()}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                )),
+
+            SizedBox(
+              height: height * 0.033,
+            ),
+
+            customListTile(
+              context: context,
+              onTap: () {
+                //navigateTo(context, const AboutUsScreen());
+              },
+              prefixIcon: Icons.history_outlined,
+              suffixIcon: Icons.chevron_right,
+              title: 'History',
+              subTitle: 'See All Requests history',
+            ),
+
+            SizedBox(
+              height: height * 0.033,
+            ),
+            customListTile(
+              context: context,
+              onTap: () {
+                AppCubit.get(context).changeAppModeTheme();
+              },
+              prefixIcon: Icons.brightness_4_outlined,
+              suffixIcon: AppCubit.get(context).isDark
+                  ? Icons.dark_mode_outlined
+                  : Icons.light_mode_outlined,
+              title: AppCubit.get(context).isDark ? 'Light' : 'Dark',
+              subTitle: 'Click to Switch Theme',
+            ),
+
+            SizedBox(
+              height: height * 0.05,
+            ),
+
+            // Logout Button
+            SizedBox(
+              width: width * 0.4,
+              child: defaultButton(
+                onPressed: () {
+                  signOut(context);
+                },
+                text: 'LOGOUT',
+                backgroundColor: AppCubit.get(context).isDark
+                    ? Colors.blue
+                    : Colors.deepOrange,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

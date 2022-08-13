@@ -1,56 +1,78 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maintenance_admin/modules/settings/settings_screen.dart';
+import 'package:maintenance_admin/shared/components/components.dart';
 
-import '../shared/components/constants.dart';
+import '../modules/request_details/request_details.dart';
+import '../modules/requests/get_requests_data.dart';
 import '../shared/network/cubit/cubit.dart';
-import '../shared/network/cubit/states.dart';
-import '../shared/network/local/cash_helper.dart';
-import '../style/custom_icons.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
-      listener: (BuildContext context, state) {},
-      builder: (BuildContext context, state) {
-
-        var cubit = AppCubit.get(context);
-        uId = CashHelper.getData(key: 'uId');
-
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(cubit.appBarTitle[cubit.currentIndex]),
+    var cubit = AppCubit.get(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+            'All Requests',
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: defaultTextButton(
+              onPressed: ()
+              {
+                navigateTo(context, const SettingsScreen());
+              },
+              text: 'Settings',
+            ),
           ),
-          // ***********************  The Scaffold Body  ***********************
-          body: cubit.screens[cubit.currentIndex],
-
-          // Bottom Navigation Bar
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (int index)
-            {
-              cubit.changeBottomNavBar(index);
-            },
-            items:
-            const [
-              BottomNavigationBarItem(
-                icon: Icon(
-                  CustomIcons.home,
+        ],
+      ),
+      // ***********************  The Scaffold Body  ***********************
+      body: FutureBuilder(
+        future: cubit.getDocId(),
+        builder: (context, snapshot) {
+          return ListView.separated(
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0,),
+            itemBuilder: (context, index) =>
+                customListTile(
+                  onTapped: ()
+                  {
+                    navigateTo(context, RequestDetails(
+                      requestCompanyName: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'companyName'),
+                      requestCompanyCity: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'city'),
+                      requestCompanySchool: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'school'),
+                      requestCompanyMachine: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'machine'),
+                      requestCompanyMachineType: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'machineType'),
+                      requestCompanyConsultation: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'consultation'),
+                    ));
+                    //print(cubit.docIDs[index]);
+                  },
+                  title: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'companyName'),
+                  leadingWidget: Icon(
+                    Icons.history_outlined,
+                    color:
+                    AppCubit.get(context).isDark ? Colors.blue : Colors.deepOrange,
+                  ),
+                  trailingWidget: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Icon(
+                      Icons.chevron_right,
+                      color:
+                      AppCubit.get(context).isDark ? Colors.blue : Colors.deepOrange,
+                    ),
+                  ),
                 ),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  CustomIcons.settings,
-                ),
-                label: 'Settings',
-              ),
-            ],
-            currentIndex: cubit.currentIndex,
-          ),
-        );
-      },
+            separatorBuilder: (context, index) =>
+            const Divider(thickness: 2.0,),
+            itemCount: cubit.docIDs.length,
+          );
+        },
+      ),
     );
   }
 }

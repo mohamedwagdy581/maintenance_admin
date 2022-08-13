@@ -7,8 +7,8 @@ import 'shared/components/constants.dart';
 import 'shared/network/cubit/cubit.dart';
 import 'shared/network/cubit/states.dart';
 import 'shared/network/local/cash_helper.dart';
+import 'shared/style/themes.dart';
 import 'splash_screen.dart';
-import 'style/themes.dart';
 
 
 void main() async {

@@ -3,9 +3,6 @@ abstract class AppStates {}
 // App Initial State
 class AppInitialState extends AppStates {}
 
-// Change BottomNavigationBar State
-class AppChangeBottomNavigationBarState extends AppStates {}
-
 // App Get User State
 class AppGetUserLoadingState extends AppStates {}
 
