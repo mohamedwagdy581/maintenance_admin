@@ -7,7 +7,6 @@ import 'shared/components/constants.dart';
 import 'shared/network/cubit/cubit.dart';
 import 'shared/network/cubit/states.dart';
 import 'shared/network/local/cash_helper.dart';
-import 'shared/network/remote/dio_helper.dart';
 import 'splash_screen.dart';
 import 'style/themes.dart';
 
@@ -15,7 +14,6 @@ import 'style/themes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  DioHelper.init();
   await CashHelper.init();
   bool? isDark = CashHelper.getData(key: 'isDark');
   uId = CashHelper.getData(key: 'uId');

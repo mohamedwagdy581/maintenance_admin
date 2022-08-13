@@ -23,16 +23,16 @@ class AllRequestsScreen extends StatelessWidget {
                 onTapped: ()
                 {
                   navigateTo(context, RequestDetails(
-                    requestCompanyName: GetRequestsData(documentId: cubit.docIDs[index], documentSchool: 'companyName'),
-                    requestCompanyCity: GetRequestsData(documentId: cubit.docIDs[index], documentSchool: 'city'),
-                    requestCompanySchool: GetRequestsData(documentId: cubit.docIDs[index], documentSchool: 'school'),
-                    requestCompanyMachine: GetRequestsData(documentId: cubit.docIDs[index], documentSchool: 'machine'),
-                    requestCompanyMachineType: GetRequestsData(documentId: cubit.docIDs[index], documentSchool: 'machineType'),
-                    requestCompanyConsultation: GetRequestsData(documentId: cubit.docIDs[index], documentSchool: 'consultation'),
+                    requestCompanyName: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'companyName'),
+                    requestCompanyCity: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'city'),
+                    requestCompanySchool: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'school'),
+                    requestCompanyMachine: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'machine'),
+                    requestCompanyMachineType: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'machineType'),
+                    requestCompanyConsultation: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'consultation'),
                   ));
                   //print(cubit.docIDs[index]);
                 },
-                title: GetRequestsData(documentId: cubit.docIDs[index], documentSchool: 'companyName'),
+                title: GetRequestsData(documentId: cubit.docIDs[index], documentDataKey: 'companyName'),
                 leadingWidget: Icon(
                   Icons.history_outlined,
                   color:

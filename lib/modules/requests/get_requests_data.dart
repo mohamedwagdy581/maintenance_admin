@@ -6,12 +6,12 @@ import '../../shared/network/cubit/cubit.dart';
 class GetRequestsData extends StatelessWidget {
 
   final String documentId;
-  final String documentSchool;
+  final String documentDataKey;
 
   const GetRequestsData({
     super.key,
     required this.documentId,
-    required this.documentSchool,
+    required this.documentDataKey,
   });
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class GetRequestsData extends StatelessWidget {
           {
             Map<String, dynamic> requests = snapshot.data!.data() as Map<String, dynamic>;
             return Text(
-                '${requests[documentSchool]}',
+                '${requests[documentDataKey]}',
               style: Theme.of(context).textTheme.bodyText1?.copyWith(
                 fontSize: 20.0,
                 fontWeight: FontWeight.normal,

@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
@@ -11,6 +11,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var user = FirebaseAuth.instance.currentUser;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -21,10 +22,35 @@ class SettingsScreen extends StatelessWidget {
           SizedBox(
             height: height * 0.033,
           ),
+
+          Container(
+            padding: const EdgeInsets.only(left: 20.0,bottom: 10.0),
+            alignment: Alignment.topLeft,
+            child: Text(
+              'Name : ${user!.displayName.toString()}',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ),
+
+          SizedBox(
+            height: height * 0.033,
+          ),
+
+          Container(
+            padding: const EdgeInsets.only(left: 20.0,bottom: 20.0,),
+            alignment: Alignment.topLeft,
+              child: Text(
+            'Email : ${user.email.toString()}',
+                style: Theme.of(context).textTheme.bodyText1,
+          )),
+
+          SizedBox(
+            height: height * 0.033,
+          ),
+
           customListTile(
             context: context,
-            onTap: ()
-            {
+            onTap: () {
               //navigateTo(context, const AboutUsScreen());
             },
             prefixIcon: Icons.history_outlined,
@@ -38,17 +64,14 @@ class SettingsScreen extends StatelessWidget {
           ),
           customListTile(
             context: context,
-            onTap: ()
-            {
+            onTap: () {
               AppCubit.get(context).changeAppModeTheme();
             },
             prefixIcon: Icons.brightness_4_outlined,
             suffixIcon: AppCubit.get(context).isDark
                 ? CustomIcons.moon
                 : CustomIcons.sun,
-            title: AppCubit.get(context).isDark
-                ? 'Light'
-                : 'Dark',
+            title: AppCubit.get(context).isDark ? 'Light' : 'Dark',
             subTitle: 'Click to Switch Theme',
           ),
 
@@ -109,7 +132,7 @@ class SettingsScreen extends StatelessWidget {
           trailing: Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: Icon(
-                suffixIcon,
+              suffixIcon,
               color: AppCubit.get(context).isDark
                   ? Colors.blue
                   : Colors.deepOrange,

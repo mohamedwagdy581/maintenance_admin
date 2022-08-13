@@ -60,48 +60,6 @@ Widget defaultTextFormField({
           )),
     );
 
-Widget defaultSigningInRowButton({
-  required String title,
-  TextStyle? titleStyle,
-  required double width,
-  required IconData icon,
-  Color iconColor = Colors.black,
-  Color rowBackgroundColor = Colors.white,
-  required VoidCallback onPressed,
-}) =>
-    Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
-      child: MaterialButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        color: rowBackgroundColor,
-        onPressed: onPressed,
-        child: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0),
-              child: Icon(
-                  icon,
-                color: iconColor,
-              ),
-            ),
-            SizedBox(
-              width: width,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                title,
-                style: titleStyle,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-
 Widget defaultButton({
   required VoidCallback onPressed,
   required String text,

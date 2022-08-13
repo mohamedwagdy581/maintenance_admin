@@ -8,9 +8,7 @@ class RequestDetails extends StatelessWidget {
   final Widget requestCompanyMachineType;
   final Widget requestCompanyConsultation;
 
-  const RequestDetails(
-
-  {
+  const RequestDetails({
     super.key,
     required this.requestCompanyName,
     required this.requestCompanyCity,
@@ -18,12 +16,10 @@ class RequestDetails extends StatelessWidget {
     required this.requestCompanyMachine,
     required this.requestCompanyMachineType,
     required this.requestCompanyConsultation,
-});
-
+  });
 
   @override
   Widget build(BuildContext context) {
-
     var height = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -35,9 +31,8 @@ class RequestDetails extends StatelessWidget {
           ),
           Text(
             'Request From : ',
-            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-              fontSize: 22.0
-            ),
+            style:
+                Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: 22.0),
           ),
           Container(
             margin: const EdgeInsets.all(20),
@@ -53,48 +48,61 @@ class RequestDetails extends StatelessWidget {
                 TableRow(
                   children: [
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           Text(
                             'Company Name',
-                            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.normal,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1?.copyWith(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.normal,
+                                    ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           requestCompanyName,
                         ],
                       ),
                     ),
-
                   ],
                 ),
                 TableRow(
                   children: [
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           Text(
                             'City',
-                            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.normal,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1?.copyWith(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.normal,
+                                    ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           requestCompanyCity,
@@ -106,21 +114,28 @@ class RequestDetails extends StatelessWidget {
                 TableRow(
                   children: [
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           Text(
                             'School',
-                            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.normal,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1?.copyWith(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.normal,
+                                    ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           requestCompanySchool,
@@ -132,21 +147,28 @@ class RequestDetails extends StatelessWidget {
                 TableRow(
                   children: [
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           Text(
                             'Machine',
-                            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.normal,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1?.copyWith(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.normal,
+                                    ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           requestCompanyMachine,
@@ -158,21 +180,28 @@ class RequestDetails extends StatelessWidget {
                 TableRow(
                   children: [
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           Text(
                             'Machine Type',
-                            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.normal,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1?.copyWith(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.normal,
+                                    ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           requestCompanyMachineType,
@@ -184,21 +213,28 @@ class RequestDetails extends StatelessWidget {
                 TableRow(
                   children: [
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           Text(
                             'Consultation',
-                            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.normal,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1?.copyWith(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.normal,
+                                    ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0,),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 8.0,
+                      ),
                       child: Column(
                         children: [
                           requestCompanyConsultation,
@@ -210,6 +246,55 @@ class RequestDetails extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(
+            height: height * 0.1,
+          ),
+          Wrap(
+            spacing: 20.0, // gap between adjacent chips
+            runSpacing: 10.0, // gap between lines
+            children: [
+              GestureDetector(
+                onTap: (){},
+                child: const Chip(
+                  backgroundColor: Colors.green,
+                  elevation: 20.0,
+                  avatar: Icon(
+                    Icons.done,
+                    color: Colors.blue,
+                  ),
+                  label: Text(
+                    'Done',
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: (){},
+                child: const Chip(
+                  elevation: 20.0,
+                  avatar: Icon(
+                    Icons.archive_outlined,
+                  ),
+                  label: Text(
+                    'Archive',
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: ()
+                {},
+                child: const Chip(
+                  elevation: 20.0,
+                  backgroundColor: Colors.red,
+                  avatar: Icon(
+                    Icons.delete_forever,
+                  ),
+                  label: Text(
+                    'Delete',
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

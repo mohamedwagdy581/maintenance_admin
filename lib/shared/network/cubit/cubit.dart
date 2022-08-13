@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../models/user_model.dart';
-import '../../../modules/request_order/request_order_screen.dart';
 import '../../../modules/requests/all_requests.dart';
 import '../../../modules/settings/settings_screen.dart';
 import '../../components/constants.dart';
@@ -19,7 +18,6 @@ class AppCubit extends Cubit<AppStates> {
 
   // List of AppBar Title
   List<String> appBarTitle = const [
-    'Home',
     'All Requests',
     'Settings',
   ];
@@ -27,7 +25,6 @@ class AppCubit extends Cubit<AppStates> {
   // Change BottomNavigationBar index
   int currentIndex = 0;
   List<Widget> screens = const [
-    RequestOrderScreen(),
     AllRequestsScreen(),
     SettingsScreen(),
   ];
