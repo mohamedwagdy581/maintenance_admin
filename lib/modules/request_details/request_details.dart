@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../shared/network/cubit/cubit.dart';
+
 class RequestDetails extends StatelessWidget {
   final Widget requestCompanyName;
   final Widget requestCompanyCity;
@@ -7,6 +9,8 @@ class RequestDetails extends StatelessWidget {
   final Widget requestCompanyMachine;
   final Widget requestCompanyMachineType;
   final Widget requestCompanyConsultation;
+  final Map<dynamic, dynamic>? doneRequestsData;
+  final Map<dynamic, dynamic>? archivedRequestsData;
 
   const RequestDetails({
     super.key,
@@ -16,6 +20,8 @@ class RequestDetails extends StatelessWidget {
     required this.requestCompanyMachine,
     required this.requestCompanyMachineType,
     required this.requestCompanyConsultation,
+    this.doneRequestsData,
+    this.archivedRequestsData,
   });
 
   @override
@@ -104,13 +110,19 @@ class RequestDetails extends StatelessWidget {
             runSpacing: 10.0, // gap between lines
             children: [
               customRequestAction(
-                onTap: () {},
+                onTap: ()
+                {
+                  AppCubit.get(context).updateData(status: 'done', id: doneRequestsData!['id']);
+                },
                 backgroundColor: Colors.green,
                 icon: Icons.done,
                 label: 'Done',
               ),
               customRequestAction(
-                onTap: () {},
+                onTap: ()
+                {
+                  AppCubit.get(context).updateData(status: 'done', id: archivedRequestsData!['id']);
+                },
                 backgroundColor: Colors.grey,
                 icon: Icons.archive_outlined,
                 label: 'Archive',

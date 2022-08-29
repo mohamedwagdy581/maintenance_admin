@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../network/cubit/cubit.dart';
+
 // Reusable Navigate Function and return to the previous screen
 void navigateTo(context, widget) => Navigator.push(
       context,
@@ -147,5 +149,82 @@ Widget customListTile({
       leading: leadingWidget,
       trailing: trailingWidget,
     ),
+  );
+}
+
+// Task item
+Widget buildRequestItem(
+    {
+      required Map model,
+      required context,
+      String? companyName,
+      String? city,
+      String? school,
+      VoidCallback? doneButton,
+      VoidCallback? archivedButton,
+    }) {
+  return Dismissible(
+    key: Key(model['id'].toString()),
+    child: Padding(
+      padding: const EdgeInsets.all(15),
+      child: Row(
+        children: [
+          const CircleAvatar(
+            radius: 40.0,
+            child: Icon(Icons.history),
+          ),
+          const SizedBox(
+            width: 30,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  companyName!,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '$city,      $school',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: 30,
+          ),
+          IconButton(
+            onPressed: doneButton,
+                /*() {
+              AppCubit.get(context).updateData(status: 'done', id: model['id']);
+            },*/
+            icon: const Icon(
+              Icons.check_box,
+              color: Colors.green,
+            ),
+          ),
+          IconButton(
+            onPressed: archivedButton,
+                /*() {
+              AppCubit.get(context)
+                  .updateData(status: 'archive', id: model['id']);
+            },*/
+            icon: const Icon(
+              Icons.archive,
+              color: Colors.black45,
+            ),
+          ),
+        ],
+      ),
+    ),
+    onDismissed: (direction) {
+      AppCubit.get(context).deleteData(id: model['id']);
+    },
   );
 }

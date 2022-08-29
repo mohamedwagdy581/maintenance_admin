@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:maintenance_admin/modules/history/history.dart';
 
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
@@ -58,7 +59,7 @@ class SettingsScreen extends StatelessWidget {
             customListTile(
               context: context,
               onTap: () {
-                //navigateTo(context, const AboutUsScreen());
+                navigateTo(context, const HistoryScreen());
               },
               prefixIcon: Icons.history_outlined,
               suffixIcon: Icons.chevron_right,

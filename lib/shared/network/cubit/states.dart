@@ -27,6 +27,18 @@ class AppGetDocIDsErrorState extends AppStates
   AppGetDocIDsErrorState(this.error);
 }
 
+// CRUD Database
+class AppCreateDatabaseState extends AppStates {}
+
+class AppInsertDatabaseState extends AppStates {}
+
+class AppGetDatabaseState extends AppStates {}
+
+class AppUpdateDatabaseState extends AppStates {}
+
+class AppDeleteDatabaseState extends AppStates {}
+
+
 // Change Mode Theme of App
 class AppChangeModeThemeState extends AppStates {}
 
