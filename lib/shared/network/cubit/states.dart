@@ -27,16 +27,29 @@ class AppGetDocIDsErrorState extends AppStates
   AppGetDocIDsErrorState(this.error);
 }
 
-// CRUD Database
-class AppCreateDatabaseState extends AppStates {}
+// App Get All Document IDs State
+class AppGetDoneDocIDsLoadingState extends AppStates {}
 
-class AppInsertDatabaseState extends AppStates {}
+class AppGetDoneDocIDsSuccessState extends AppStates {}
 
-class AppGetDatabaseState extends AppStates {}
+class AppGetDoneDocIDsErrorState extends AppStates
+{
+  final String error;
 
-class AppUpdateDatabaseState extends AppStates {}
+  AppGetDoneDocIDsErrorState(this.error);
+}
 
-class AppDeleteDatabaseState extends AppStates {}
+// App Get All Document IDs State
+class AppGetArchivedDocIDsLoadingState extends AppStates {}
+
+class AppGetArchivedDocIDsSuccessState extends AppStates {}
+
+class AppGetArchivedDocIDsErrorState extends AppStates
+{
+  final String error;
+
+  AppGetArchivedDocIDsErrorState(this.error);
+}
 
 
 // Change Mode Theme of App

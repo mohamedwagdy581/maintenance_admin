@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:maintenance_admin/modules/history/archived_task/archived_task_screen.dart';
-import 'package:maintenance_admin/modules/history/done_task/done_task_screen.dart';
 import 'package:maintenance_admin/shared/components/components.dart';
+
+import '../requests/archived_requests/archived_requests_screen.dart';
+import '../requests/done_requests/done_requests_screen.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({Key? key}) : super(key: key);

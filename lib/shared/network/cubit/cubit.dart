@@ -28,15 +28,15 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   // Get Document IDs to start access to all data in document in firebase
-  List<String> docIDs = [];
+  List<String> allDocIDs = [];
 
-  Future getDocId() async
+  Future getAllDocId() async
   {
     emit(AppGetDocIDsLoadingState());
     await FirebaseFirestore.instance.collection('requests').get().then((
         snapshot) {
       snapshot.docs.forEach((document) {
-        docIDs.add(document.reference.id);
+        allDocIDs.add(document.reference.id);
         emit(AppGetDocIDsSuccessState());
       });
     }).catchError((error)
@@ -45,100 +45,42 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  // CRUD Local Database
-  late Database database;
-  List<Map> newRequests = [];
-  List<Map> doneRequests = [];
-  List<Map> archiveRequests = [];
+  // Get Document IDs to start access to all data in document in firebase
+  List<String> doneDocIDs = [];
 
-  // Start Crating Database
-  void createDatabase() {
-    openDatabase(
-      'requests.db',
-      version: 1,
-      onCreate: (database, version) {
-        database
-            .execute(
-            'CREATE TABLE tasks(id INTEGER PRIMARY KEY, companyName TEXT, city TEXT, school TEXT, machine TEXT, machineType TEXT, consultation TEXT)')
-            .then((value) {})
-            .catchError((error) {
-          print('Error when create table ${error.toString()}');
-        });
-      },
-      onOpen: (database) {
-        getDataFromDatabase(database);
-        print('Database Opened');
-      },
-    ).then((value) {
-      database = value;
-      emit(AppCreateDatabaseState());
-    });
-  }
-
-  // Insert items to Database
-  insertToDatabase({
-    required String companyName,
-    required String city,
-    required String school,
-    required String machine,
-    required String machineType,
-    required String consultation,
-    required String status,
-  }) async {
-    await database.transaction((txn) => txn
-        .rawInsert(
-        'INSERT INTO tasks(companyName, city, school, machine, machineType, consultation, status) VALUES("$companyName", "$city", "$school", "$machine","$machineType", "$consultation", "new")')
-        .then((value) {
-      print('$value inserted successfully');
-      emit(AppInsertDatabaseState());
-
-      getDataFromDatabase(database);
-    }).catchError((error) {
-      print('Error when inserting record ${error.toString()}');
-    }));
-  }
-
-  // Get Data from Database
-  getDataFromDatabase(database) {
-    newRequests = [];
-    doneRequests = [];
-    archiveRequests = [];
-    database.rawQuery('SELECT * FROM tasks').then((value) {
-      value.forEach((element) {
-        if (element['status'] == 'new') {
-          newRequests.add(element);
-        } else if (element['status'] == 'done') {
-          doneRequests.add(element);
-        } else {
-          archiveRequests.add(element);
-        }
+  Future getDoneDocId() async
+  {
+    emit(AppGetDoneDocIDsLoadingState());
+    await FirebaseFirestore.instance.collection('doneRequests').get().then((
+        snapshot) {
+      snapshot.docs.forEach((document) {
+        doneDocIDs.add(document.reference.id);
+        emit(AppGetDoneDocIDsSuccessState());
       });
-      emit(AppGetDatabaseState());
+    }).catchError((error)
+    {
+      emit(AppGetDoneDocIDsErrorState(error));
     });
   }
 
-  // Update Record
-  void updateData({required String status, required int id}) {
-    database.rawUpdate(
-      'UPDATE requests SET status = ? WHERE id = ?',
-      [status, id],
-    ).then((value) {
-      getDataFromDatabase(database);
-      emit(AppUpdateDatabaseState());
+
+  // Get Document IDs to start access to all data in document in firebase
+  List<String> archivedDocIDs = [];
+
+  Future getArchivedDocId() async
+  {
+    emit(AppGetArchivedDocIDsLoadingState());
+    await FirebaseFirestore.instance.collection('archivedRequests').get().then((
+        snapshot) {
+      snapshot.docs.forEach((document) {
+        archivedDocIDs.add(document.reference.id);
+        emit(AppGetArchivedDocIDsSuccessState());
+      });
+    }).catchError((error)
+    {
+      emit(AppGetArchivedDocIDsErrorState(error));
     });
   }
-
-  // Delete Record
-  void deleteData({required int id}) {
-    database.rawUpdate(
-      'DELETE FROM requests WHERE id = ?',
-      [id],
-    ).then((value) {
-      getDataFromDatabase(database);
-      emit(AppDeleteDatabaseState());
-    });
-  }
-
 
   // Function to Change Theme mode
   bool isDark = false;

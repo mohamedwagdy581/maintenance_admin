@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../shared/network/cubit/cubit.dart';
+import '../../../shared/network/cubit/cubit.dart';
 
 class GetRequestsData extends StatelessWidget {
 

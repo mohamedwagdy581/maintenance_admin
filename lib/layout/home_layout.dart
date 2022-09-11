@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:maintenance_admin/modules/requests/all_requests/requests.dart';
+import 'package:maintenance_admin/modules/requests/archived_requests/archived_requests_screen.dart';
+import 'package:maintenance_admin/modules/requests/done_requests/done_requests_screen.dart';
 import 'package:maintenance_admin/modules/settings/settings_screen.dart';
 import 'package:maintenance_admin/shared/components/components.dart';
-
-import '../modules/request_details/request_details.dart';
-import '../modules/requests/get_requests_data.dart';
-import '../shared/network/cubit/cubit.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var cubit = AppCubit.get(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'All Requests',
+          'Home',
           style: Theme.of(context).textTheme.bodyText1,
         ),
         actions: [
@@ -31,76 +29,67 @@ class HomeLayout extends StatelessWidget {
         ],
       ),
       // ***********************  The Scaffold Body  ***********************
-      body: FutureBuilder(
-        future: cubit.getDocId(),
-        builder: (context, snapshot) {
-          return ListView.separated(
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10.0,
-            ),
-            itemBuilder: (context, index) => customListTile(
-              onTapped: () {
-                navigateTo(
-                    context,
-                    RequestDetails(
-                      requestCompanyName: GetRequestsData(
-                          documentId: cubit.docIDs[index],
-                          documentDataKey: 'companyName',
-                      ),
-                      requestCompanyCity: GetRequestsData(
-                          documentId: cubit.docIDs[index],
-                          documentDataKey: 'city',
-                      ),
-                      requestCompanySchool: GetRequestsData(
-                          documentId: cubit.docIDs[index],
-                          documentDataKey: 'school',
-                      ),
-                      requestCompanyMachine: GetRequestsData(
-
-                          documentId: cubit.docIDs[index],
-                          documentDataKey: 'machine',
-                      ),
-                      requestCompanyMachineType: GetRequestsData(
-                          documentId: cubit.docIDs[index],
-                          documentDataKey: 'machineType',
-                      ),
-                      requestCompanyConsultation: GetRequestsData(
-                          documentId: cubit.docIDs[index],
-                          documentDataKey: 'consultation',
-                      ),
-                      /*archivedRequestsData: archivedRequests[index],
-                      doneRequestsData: doneRequests[index],*/
-                    ));
-                //print(cubit.docIDs[index]);
-              },
-              title: GetRequestsData(
-                  documentId: cubit.docIDs[index],
-                  documentDataKey: 'companyName',
-              ),
-              leadingWidget: Icon(
-                Icons.history_outlined,
-                color: AppCubit.get(context).isDark
-                    ? Colors.blue
-                    : Colors.deepOrange,
-              ),
-              trailingWidget: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  Icons.chevron_right,
-                  color: AppCubit.get(context).isDark
-                      ? Colors.blue
-                      : Colors.deepOrange,
-                ),
-              ),
-            ),
-            separatorBuilder: (context, index) => const Divider(
-              thickness: 2.0,
-            ),
-            itemCount: cubit.docIDs.length,
-          );
-        },
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              customCard(
+                  onTap: () {
+                    navigateTo(context, const AllRequests());
+                  },
+                  title: 'All Requests'),
+              customCard(
+                  onTap: () {
+                    navigateTo(context, const DoneRequestsScreen());
+                  },
+                  title: 'Done Requests'),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              customCard(
+                  onTap: () {
+                    navigateTo(context, const ArchivedRequestsScreen());
+                  },
+                  title: 'Archived Requests'),
+              customCard(
+                  onTap: () {
+                    navigateTo(context, const AllRequests());
+                  },
+                  title: 'All Technicals'),
+            ],
+          ),
+        ],
       ),
     );
   }
+
+  Widget customCard({
+    required VoidCallback onTap,
+    required String title,
+  }) =>
+      Container(
+        padding: const EdgeInsets.all(5.0),
+        margin: const EdgeInsets.all(5.0),
+        height: 200.0,
+        width: 180.0,
+        child: InkWell(
+          onTap: onTap,
+          child: Card(
+            elevation: 15.0,
+            child: Center(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
 }

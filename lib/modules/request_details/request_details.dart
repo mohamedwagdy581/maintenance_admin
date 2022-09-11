@@ -112,7 +112,6 @@ class RequestDetails extends StatelessWidget {
               customRequestAction(
                 onTap: ()
                 {
-                  AppCubit.get(context).updateData(status: 'done', id: doneRequestsData!['id']);
                 },
                 backgroundColor: Colors.green,
                 icon: Icons.done,
@@ -121,7 +120,6 @@ class RequestDetails extends StatelessWidget {
               customRequestAction(
                 onTap: ()
                 {
-                  AppCubit.get(context).updateData(status: 'done', id: archivedRequestsData!['id']);
                 },
                 backgroundColor: Colors.grey,
                 icon: Icons.archive_outlined,
