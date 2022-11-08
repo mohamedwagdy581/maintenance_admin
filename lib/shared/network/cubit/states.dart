@@ -15,6 +15,31 @@ class AppGetUserErrorState extends AppStates
   AppGetUserErrorState(this.error);
 }
 
+// App Get All Users IDs State
+class AppGetUsersLoadingState extends AppStates {}
+
+class AppGetUsersSuccessState extends AppStates {}
+
+class AppGetUsersErrorState extends AppStates
+{
+  final String error;
+
+  AppGetUsersErrorState(this.error);
+}
+
+// App Get All Technicals IDs State
+class AppGetTechnicalsLoadingState extends AppStates {}
+
+class AppGetTechnicalsSuccessState extends AppStates {}
+
+class AppGetTechnicalsErrorState extends AppStates
+{
+  final String error;
+
+  AppGetTechnicalsErrorState(this.error);
+}
+
+
 // App Get All Document IDs State
 class AppGetDocIDsLoadingState extends AppStates {}
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/network/cubit/cubit.dart';
 
 class RequestDetails extends StatelessWidget {
   final Widget requestCompanyName;
@@ -105,34 +104,6 @@ class RequestDetails extends StatelessWidget {
           SizedBox(
             height: height * 0.1,
           ),
-          Wrap(
-            spacing: 20.0, // gap between adjacent chips
-            runSpacing: 10.0, // gap between lines
-            children: [
-              customRequestAction(
-                onTap: ()
-                {
-                },
-                backgroundColor: Colors.green,
-                icon: Icons.done,
-                label: 'Done',
-              ),
-              customRequestAction(
-                onTap: ()
-                {
-                },
-                backgroundColor: Colors.grey,
-                icon: Icons.archive_outlined,
-                label: 'Archive',
-              ),
-              customRequestAction(
-                onTap: () {},
-                backgroundColor: Colors.red,
-                icon: Icons.delete_forever,
-                label: 'Delete',
-              ),
-            ],
-          )
         ],
       ),
     );

@@ -13,11 +13,49 @@ class AppCubit extends Cubit<AppStates> {
   // Get context to Easily use in a different places in all Project
   static AppCubit get(context) => BlocProvider.of(context);
 
+  // Get Document IDs to start access to all data in document in firebase
+  List<String> allUsers = [];
+
+  Future getAllUsers() async
+  {
+    emit(AppGetUsersLoadingState());
+    allUsers.clear();
+    await FirebaseFirestore.instance.collection('users').get().then((
+        snapshot) {
+      for (var document in snapshot.docs) {
+        allUsers.add(document.reference.id);
+        emit(AppGetUsersSuccessState());
+      }
+    }).catchError((error)
+    {
+      emit(AppGetUsersErrorState(error));
+    });
+  }
+
+  // Get Document IDs to start access to all data in document in firebase
+  List<String> allTechnicals = [];
+
+  Future getAllTechnicals() async
+  {
+    emit(AppGetTechnicalsLoadingState());
+    allTechnicals.clear();
+    await FirebaseFirestore.instance.collection('technicals').get().then((
+        snapshot) {
+      for (var document in snapshot.docs) {
+        allTechnicals.add(document.reference.id);
+        emit(AppGetTechnicalsSuccessState());
+      }
+    }).catchError((error)
+    {
+      emit(AppGetTechnicalsErrorState(error));
+    });
+  }
+
   // Get User Data To stay Login
   UserModel? userModel;
 
   void getUserData() {
-    //emit(AppGetUserLoadingState());
+    emit(AppGetUserLoadingState());
 
     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
       userModel = UserModel.fromJson(value.data()!);
@@ -33,12 +71,13 @@ class AppCubit extends Cubit<AppStates> {
   Future getAllDocId() async
   {
     emit(AppGetDocIDsLoadingState());
+    allDocIDs.clear();
     await FirebaseFirestore.instance.collection('requests').get().then((
         snapshot) {
-      snapshot.docs.forEach((document) {
+      for (var document in snapshot.docs) {
         allDocIDs.add(document.reference.id);
         emit(AppGetDocIDsSuccessState());
-      });
+      }
     }).catchError((error)
     {
       emit(AppGetDocIDsErrorState(error));
@@ -51,12 +90,13 @@ class AppCubit extends Cubit<AppStates> {
   Future getDoneDocId() async
   {
     emit(AppGetDoneDocIDsLoadingState());
+    doneDocIDs.clear();
     await FirebaseFirestore.instance.collection('doneRequests').get().then((
         snapshot) {
-      snapshot.docs.forEach((document) {
+      for (var document in snapshot.docs) {
         doneDocIDs.add(document.reference.id);
         emit(AppGetDoneDocIDsSuccessState());
-      });
+      }
     }).catchError((error)
     {
       emit(AppGetDoneDocIDsErrorState(error));
@@ -69,13 +109,14 @@ class AppCubit extends Cubit<AppStates> {
 
   Future getArchivedDocId() async
   {
+    archivedDocIDs.clear();
     emit(AppGetArchivedDocIDsLoadingState());
     await FirebaseFirestore.instance.collection('archivedRequests').get().then((
         snapshot) {
-      snapshot.docs.forEach((document) {
+      for (var document in snapshot.docs) {
         archivedDocIDs.add(document.reference.id);
         emit(AppGetArchivedDocIDsSuccessState());
-      });
+      }
     }).catchError((error)
     {
       emit(AppGetArchivedDocIDsErrorState(error));
