@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maintenance_admin/modules/requests/done_requests/get_done_requests.dart';
+import 'package:maintenance_admin/modules/requests/all_requests/get_requests_data.dart';
 import 'package:maintenance_admin/shared/components/components.dart';
 
 import '../../../shared/network/cubit/cubit.dart';
@@ -28,34 +28,41 @@ class DoneRequestsScreen extends StatelessWidget {
                 navigateTo(
                     context,
                     RequestDetails(
-                      requestCompanyName: GetDoneRequests(
+                      requestCompanyName: GetRequestsData(
+                        collection: 'doneRequests',
                         documentId: cubit.doneDocIDs[index],
                         documentDataKey: 'companyName',
                       ),
-                      requestCompanyCity: GetDoneRequests(
+                      requestCompanyCity: GetRequestsData(
+                        collection: 'doneRequests',
                         documentId: cubit.doneDocIDs[index],
                         documentDataKey: 'city',
                       ),
-                      requestCompanySchool: GetDoneRequests(
+                      requestCompanySchool: GetRequestsData(
+                        collection: 'doneRequests',
                         documentId: cubit.doneDocIDs[index],
                         documentDataKey: 'school',
                       ),
-                      requestCompanyMachine: GetDoneRequests(
+                      requestCompanyMachine: GetRequestsData(
+                        collection: 'doneRequests',
 
                         documentId: cubit.doneDocIDs[index],
                         documentDataKey: 'machine',
                       ),
-                      requestCompanyMachineType: GetDoneRequests(
+                      requestCompanyMachineType: GetRequestsData(
+                        collection: 'doneRequests',
                         documentId: cubit.doneDocIDs[index],
                         documentDataKey: 'machineType',
                       ),
-                      requestCompanyConsultation: GetDoneRequests(
+                      requestCompanyConsultation: GetRequestsData(
+                        collection: 'doneRequests',
                         documentId: cubit.doneDocIDs[index],
                         documentDataKey: 'consultation',
                       ),
                     ));
               },
-              title: GetDoneRequests(
+              title: GetRequestsData(
+                collection: 'doneRequests',
                 documentId: cubit.doneDocIDs[index],
                 documentDataKey: 'companyName',
               ),

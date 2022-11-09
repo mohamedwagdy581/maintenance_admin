@@ -2,12 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:maintenance_admin/modules/settings/settings_screen.dart';
 import 'package:maintenance_admin/shared/components/components.dart';
 
+import '../../../shared/components/constants.dart';
 import '../../../shared/network/cubit/cubit.dart';
-import '../../request_details/request_details.dart';
-import 'get_requests_data.dart';
+import '../../requests/all_requests/get_requests_data.dart';
 
-class AllRequests extends StatelessWidget {
-  const AllRequests({Key? key}) : super(key: key);
+class UpdateMachineTypes extends StatefulWidget {
+  const UpdateMachineTypes({Key? key}) : super(key: key);
+
+  @override
+  State<UpdateMachineTypes> createState() => _UpdateCompaniesListState();
+}
+
+class _UpdateCompaniesListState extends State<UpdateMachineTypes> {
+  final _formKey = GlobalKey<FormState>();
+
+  List<String> sugars = ['1', '2', '3', '4', '5',];
+
+  // Form values
+  late String _currentName;
+
 
   @override
   Widget build(BuildContext context) {
@@ -15,24 +28,13 @@ class AllRequests extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'All Requests',
+          'Machine Types',
           style: Theme.of(context).textTheme.bodyText1,
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 15.0),
-            child: defaultTextButton(
-              onPressed: () {
-                navigateTo(context, const SettingsScreen());
-              },
-              text: 'Settings',
-            ),
-          ),
-        ],
       ),
       // ***********************  The Scaffold Body  ***********************
       body: FutureBuilder(
-        future: cubit.getAllDocId(),
+        future: cubit.getMachineTypesId(),
         builder: (context, snapshot) {
           return ListView.separated(
             physics: const BouncingScrollPhysics(),
@@ -41,51 +43,45 @@ class AllRequests extends StatelessWidget {
             ),
             itemBuilder: (context, index) => customListTile(
               onTapped: () {
-                navigateTo(
+                /*navigateTo(
                     context,
                     RequestDetails(
                       requestCompanyName: GetRequestsData(
-                        collection: 'requests',
                         documentId: cubit.allDocIDs[index],
                         documentDataKey: 'companyName',
                       ),
                       requestCompanyCity: GetRequestsData(
-                        collection: 'requests',
                         documentId: cubit.allDocIDs[index],
                         documentDataKey: 'city',
                       ),
                       requestCompanySchool: GetRequestsData(
-                        collection: 'requests',
                         documentId: cubit.allDocIDs[index],
                         documentDataKey: 'school',
                       ),
                       requestCompanyMachine: GetRequestsData(
-                        collection: 'requests',
 
                         documentId: cubit.allDocIDs[index],
                         documentDataKey: 'machine',
                       ),
                       requestCompanyMachineType: GetRequestsData(
-                        collection: 'requests',
                         documentId: cubit.allDocIDs[index],
                         documentDataKey: 'machineType',
                       ),
                       requestCompanyConsultation: GetRequestsData(
-                        collection: 'requests',
                         documentId: cubit.allDocIDs[index],
                         documentDataKey: 'consultation',
                       ),
-                      /*archivedRequestsData: archivedRequests[index],
-                      doneRequestsData: doneRequests[index],*/
-                    ));
+                      *//*archivedRequestsData: archivedRequests[index],
+                      doneRequestsData: doneRequests[index],*//*
+                    ));*/
                 //print(cubit.docIDs[index]);
               },
               title: Container(
                 alignment: AlignmentDirectional.center,
                 child: GetRequestsData(
-                  collection: 'requests',
-                  documentId: cubit.allDocIDs[index],
-                  documentDataKey: 'companyName',
+                  collection: 'machineTypes',
+                  documentId: cubit.allMachineTypes[index],
+                  documentDataKey: 'machineTypeName',
                 ),
               ),
               leadingWidget: Icon(
@@ -97,9 +93,9 @@ class AllRequests extends StatelessWidget {
               trailingWidget: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: Icon(
-                  Icons.chevron_right,
+                  Icons.delete_forever,
                   color: AppCubit.get(context).isDark
-                      ? Colors.blue
+                      ? Colors.red
                       : Colors.deepOrange,
                 ),
               ),
@@ -107,10 +103,53 @@ class AllRequests extends StatelessWidget {
             separatorBuilder: (context, index) => const Divider(
               thickness: 2.0,
             ),
-            itemCount: cubit.allDocIDs.length,
+            itemCount: cubit.allMachineTypes.length,
           );
         },
       ),
+      floatingActionButton: FloatingActionButton(onPressed: ()
+      {
+        _showUpdatePanel();
+      },
+        child: const Icon(Icons.edit,color: Colors.white,),
+      ),
     );
+  }
+
+  void _showUpdatePanel()
+  {
+    showModalBottomSheet(
+        context: context,
+        builder: (context)
+        {
+          return Container(
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const Text('Update Your Lists.',style: TextStyle(fontSize: 18.0,),),
+                  const SizedBox(height: 20.0,),
+                  TextFormField(
+                    decoration: textInputDecoration,
+                    validator: (val) => val!.isEmpty ? 'Please Enter Name' : null,
+                    onChanged: (val) => setState(() => _currentName = val),
+                  ),
+                  const SizedBox(height: 20.0,),
+                  //
+                  //
+                  defaultButton(
+                    backgroundColor: Colors.pink[400],
+                    onPressed: () async
+                    {
+                      print(_currentName);
+                    },
+                    text: 'Update',
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

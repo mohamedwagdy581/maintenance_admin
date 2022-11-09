@@ -7,17 +7,18 @@ class GetRequestsData extends StatelessWidget {
 
   final String documentId;
   final String documentDataKey;
+  final String collection;
 
   const GetRequestsData({
     super.key,
     required this.documentId,
-    required this.documentDataKey,
+    required this.documentDataKey, required this.collection,
   });
   @override
   Widget build(BuildContext context) {
     // Get the Collection
 
-    CollectionReference requests = FirebaseFirestore.instance.collection('requests');
+    CollectionReference requests = FirebaseFirestore.instance.collection(collection);
 
     return FutureBuilder<DocumentSnapshot>(
       future: requests.doc(documentId).get(),

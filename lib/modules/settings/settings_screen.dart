@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:maintenance_admin/modules/history/history.dart';
+import 'package:maintenance_admin/modules/update_customer_home/update_customer_home.dart';
 
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
@@ -51,6 +52,21 @@ class SettingsScreen extends StatelessWidget {
                   'Email : ${user.email.toString()}',
                   style: Theme.of(context).textTheme.bodyText1,
                 )),
+
+            SizedBox(
+              height: height * 0.033,
+            ),
+
+            customListTile(
+              context: context,
+              onTap: () {
+                navigateTo(context, const UpdateCustomerHome());
+              },
+              prefixIcon: Icons.edit,
+              suffixIcon: Icons.chevron_right,
+              title: 'Update Customer Home',
+              subTitle: 'Update Lists of Company and Devices',
+            ),
 
             SizedBox(
               height: height * 0.033,

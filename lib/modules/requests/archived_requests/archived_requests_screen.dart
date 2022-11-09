@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maintenance_admin/modules/request_details/archived_done_details_screen.dart';
-import 'package:maintenance_admin/modules/requests/archived_requests/get_archived_requests.dart';
+import 'package:maintenance_admin/modules/requests/all_requests/get_requests_data.dart';
 import 'package:maintenance_admin/shared/components/components.dart';
 
 import '../../../shared/network/cubit/cubit.dart';
@@ -28,28 +28,33 @@ class ArchivedRequestsScreen extends StatelessWidget {
                 navigateTo(
                     context,
                     ArchivedAndDoneRequestDetailsScreen(
-                      requestCompanyName: GetArchivedRequestsData(
+                      requestCompanyName: GetRequestsData(
+                        collection: 'archivedRequests',
                         documentId: cubit.archivedDocIDs[index],
                         documentDataKey: 'companyName',
                       ),
-                      requestCompanyCity: GetArchivedRequestsData(
+                      requestCompanyCity: GetRequestsData(
+                        collection: 'archivedRequests',
                         documentId: cubit.archivedDocIDs[index],
                         documentDataKey: 'city',
                       ),
-                      requestCompanySchool: GetArchivedRequestsData(
+                      requestCompanySchool: GetRequestsData(
+                        collection: 'archivedRequests',
                         documentId: cubit.archivedDocIDs[index],
                         documentDataKey: 'school',
                       ),
-                      requestCompanyMachine: GetArchivedRequestsData(
-
+                      requestCompanyMachine: GetRequestsData(
+                        collection: 'archivedRequests',
                         documentId: cubit.archivedDocIDs[index],
                         documentDataKey: 'machine',
                       ),
-                      requestCompanyMachineType: GetArchivedRequestsData(
+                      requestCompanyMachineType: GetRequestsData(
+                        collection: 'archivedRequests',
                         documentId: cubit.archivedDocIDs[index],
                         documentDataKey: 'machineType',
                       ),
-                      requestCompanyConsultation: GetArchivedRequestsData(
+                      requestCompanyConsultation: GetRequestsData(
+                        collection: 'archivedRequests',
                         documentId: cubit.archivedDocIDs[index],
                         documentDataKey: 'consultation',
                       ),
@@ -58,9 +63,13 @@ class ArchivedRequestsScreen extends StatelessWidget {
                     ));
                 //print(cubit.docIDs[index]);
               },
-              title: GetArchivedRequestsData(
-                documentId: cubit.archivedDocIDs[index],
-                documentDataKey: 'technicalName',
+              title: Container(
+                alignment: AlignmentDirectional.center,
+                child: GetRequestsData(
+                  collection: 'archivedRequests',
+                  documentId: cubit.archivedDocIDs[index],
+                  documentDataKey: 'technicalName',
+                ),
               ),
               leadingWidget: Icon(
                 Icons.history_outlined,

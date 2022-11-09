@@ -76,7 +76,61 @@ class AppGetArchivedDocIDsErrorState extends AppStates
   AppGetArchivedDocIDsErrorState(this.error);
 }
 
+// App Get All Cities IDs State
+class AppGetCitiesLoadingState extends AppStates {}
+
+class AppGetCitiesSuccessState extends AppStates {}
+
+class AppGetCitiesErrorState extends AppStates
+{
+  final String error;
+
+  AppGetCitiesErrorState(this.error);
+}
+
+// App Get All Companies IDs State
+class AppGetCompaniesLoadingState extends AppStates {}
+
+class AppGetCompaniesSuccessState extends AppStates {}
+
+class AppGetCompaniesErrorState extends AppStates
+{
+  final String error;
+
+  AppGetCompaniesErrorState(this.error);
+}
+
+// App Get All Machines IDs State
+class AppGetMachinesLoadingState extends AppStates {}
+
+class AppGetMachinesSuccessState extends AppStates {}
+
+class AppGetMachinesErrorState extends AppStates
+{
+  final String error;
+
+  AppGetMachinesErrorState(this.error);
+}
+
+// App Get All Machine Types IDs State
+class AppGetMachineTypesLoadingState extends AppStates {}
+
+class AppGetMachineTypesSuccessState extends AppStates {}
+
+class AppGetMachineTypesErrorState extends AppStates
+{
+  final String error;
+
+  AppGetMachineTypesErrorState(this.error);
+}
+
+
+class AppChangeBottomSheetState extends AppStates {}
 
 // Change Mode Theme of App
 class AppChangeModeThemeState extends AppStates {}
+
+
+
+
 

@@ -33,8 +33,8 @@ class HomeLayout extends StatelessWidget {
         ],
       ),
       // ***********************  The Scaffold Body  ***********************
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
+        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,29 +78,4 @@ class HomeLayout extends StatelessWidget {
     );
   }
 
-  Widget customCard({
-    required VoidCallback onTap,
-    required String title,
-  }) =>
-      Container(
-        padding: const EdgeInsets.all(5.0),
-        margin: const EdgeInsets.all(5.0),
-        height: 200.0,
-        width: 180.0,
-        child: InkWell(
-          onTap: onTap,
-          child: Card(
-            elevation: 15.0,
-            child: Center(
-              child: Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
 }

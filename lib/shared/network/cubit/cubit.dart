@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sqflite/sqflite.dart';
 
 import '../../../models/user_model.dart';
 import '../../components/constants.dart';
@@ -123,6 +123,98 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  // Get Cities IDs to start access to all data in document in firebase
+  List<String> allCities = [];
+
+  Future getCitiesId() async
+  {
+
+    emit(AppGetCitiesLoadingState());
+    allCities.clear();
+    await FirebaseFirestore.instance.collection('cities').get().then((
+        snapshot) {
+      for (var document in snapshot.docs) {
+        allCities.add(document.reference.id);
+        emit(AppGetCitiesSuccessState());
+      }
+    }).catchError((error)
+    {
+      emit(AppGetCitiesErrorState(error));
+    });
+  }
+
+  // Get Companies IDs to start access to all data in document in firebase
+  List<String> allCompanies = [];
+
+  Future getCompaniesId() async
+  {
+
+    emit(AppGetCompaniesLoadingState());
+    allCompanies.clear();
+    await FirebaseFirestore.instance.collection('companies').get().then((
+        snapshot) {
+      for (var document in snapshot.docs) {
+        allCompanies.add(document.reference.id);
+        emit(AppGetCompaniesSuccessState());
+      }
+    }).catchError((error)
+    {
+      emit(AppGetCompaniesErrorState(error));
+    });
+  }
+
+  // Get Machines IDs to start access to all data in document in firebase
+  List<String> allMachines = [];
+
+  Future getMachinesId() async
+  {
+
+    emit(AppGetMachinesLoadingState());
+    allMachines.clear();
+    await FirebaseFirestore.instance.collection('machines').get().then((
+        snapshot) {
+      for (var document in snapshot.docs) {
+        allMachines.add(document.reference.id);
+        emit(AppGetMachinesSuccessState());
+      }
+    }).catchError((error)
+    {
+      emit(AppGetMachinesErrorState(error));
+    });
+  }
+
+  // Get Machines IDs to start access to all data in document in firebase
+  List<String> allMachineTypes = [];
+
+  Future getMachineTypesId() async
+  {
+
+    emit(AppGetMachineTypesLoadingState());
+    allMachineTypes.clear();
+    await FirebaseFirestore.instance.collection('machineTypes').get().then((
+        snapshot) {
+      for (var document in snapshot.docs) {
+        allMachineTypes.add(document.reference.id);
+        emit(AppGetMachineTypesSuccessState());
+      }
+    }).catchError((error)
+    {
+      emit(AppGetMachineTypesErrorState(error));
+    });
+  }
+
+  bool isBottomSheetShown = false;
+  IconData fabIcon = Icons.edit;
+
+  void changeBottomSheet({
+    required bool isShow,
+    required IconData icon,
+  }) {
+    isBottomSheetShown = isShow;
+    fabIcon = icon;
+    emit(AppChangeBottomSheetState());
+  }
+
   // Function to Change Theme mode
   bool isDark = false;
 
@@ -137,6 +229,8 @@ class AppCubit extends Cubit<AppStates> {
       });
     }
   }
+
+
 
 
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maintenance_admin/modules/users/all_users/get_users_data.dart';
+import 'package:maintenance_admin/modules/requests/all_requests/get_requests_data.dart';
 import 'package:maintenance_admin/modules/users/user_details/user_details_screen.dart';
 
 import '../../../shared/components/components.dart';
@@ -34,9 +34,10 @@ class AllUsersScreen extends StatelessWidget {
                     UserDetailsScreen(index: index,));
                 //print(cubit.docIDs[index]);
               },
-              title: GetUsersData(
+              title: GetRequestsData(
                 documentId: cubit.allUsers[index],
                 documentDataKey: 'name',
+                collection: 'users',
               ),
               leadingWidget: Icon(
                 Icons.history_outlined,

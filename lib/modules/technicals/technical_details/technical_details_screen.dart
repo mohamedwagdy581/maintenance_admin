@@ -11,6 +11,7 @@ class TechnicalDetailsScreen extends StatelessWidget {
   const TechnicalDetailsScreen({
     super.key,
     required this.index,
+
   });
 
   @override

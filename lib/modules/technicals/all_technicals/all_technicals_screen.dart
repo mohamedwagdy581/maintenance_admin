@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:maintenance_admin/modules/requests/all_requests/get_requests_data.dart';
 import 'package:maintenance_admin/modules/technicals/technical_details/technical_details_screen.dart';
 
 import '../../../shared/components/components.dart';
 import '../../../shared/network/cubit/cubit.dart';
-import 'get_technicals_data.dart';
 
 class AllTechnicalsScreen extends StatelessWidget {
   const AllTechnicalsScreen({Key? key}) : super(key: key);
@@ -37,10 +37,15 @@ class AllTechnicalsScreen extends StatelessWidget {
                 );
                 //print(cubit.docIDs[index]);
               },
-              title: GetTechnicalsData(
+              title: GetRequestsData(
                 documentId: cubit.allTechnicals[index],
                 documentDataKey: 'name',
+                  collection: 'technicals',
               ),
+              /*GetTechnicalsData(
+                documentId: cubit.allTechnicals[index],
+                documentDataKey: 'name',
+              ),*/
               leadingWidget: Icon(
                 Icons.history_outlined,
                 color: AppCubit.get(context).isDark
