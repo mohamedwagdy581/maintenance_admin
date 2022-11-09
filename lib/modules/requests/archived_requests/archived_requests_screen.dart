@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maintenance_admin/modules/request_details/archived_done_details_screen.dart';
+import 'package:maintenance_admin/modules/request_details/request_details.dart';
 import 'package:maintenance_admin/modules/requests/all_requests/get_requests_data.dart';
 import 'package:maintenance_admin/shared/components/components.dart';
 
@@ -27,7 +27,7 @@ class ArchivedRequestsScreen extends StatelessWidget {
               onTapped: () {
                 navigateTo(
                     context,
-                    ArchivedAndDoneRequestDetailsScreen(
+                    RequestDetails(
                       requestCompanyName: GetRequestsData(
                         collection: 'archivedRequests',
                         documentId: cubit.archivedDocIDs[index],
