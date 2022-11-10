@@ -164,7 +164,7 @@ Color? chooseToastColor(ToastStates state) {
 }
 
 Widget customListTile({
-  required VoidCallback onTapped,
+  VoidCallback? onTapped,
   required Widget title,
   Widget? leadingWidget,
   Widget? trailingWidget,

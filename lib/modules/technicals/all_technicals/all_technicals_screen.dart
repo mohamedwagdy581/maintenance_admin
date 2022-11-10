@@ -42,10 +42,6 @@ class AllTechnicalsScreen extends StatelessWidget {
                 documentDataKey: 'name',
                   collection: 'technicals',
               ),
-              /*GetTechnicalsData(
-                documentId: cubit.allTechnicals[index],
-                documentDataKey: 'name',
-              ),*/
               leadingWidget: Icon(
                 Icons.history_outlined,
                 color: AppCubit.get(context).isDark

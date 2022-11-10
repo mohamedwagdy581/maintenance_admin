@@ -124,6 +124,11 @@ class AppGetMachineTypesErrorState extends AppStates
   AppGetMachineTypesErrorState(this.error);
 }
 
+// CRUD
+class AppGetCreateItemSuccessState extends AppStates {}
+class AppGetDeleteItemSuccessState extends AppStates {}
+class AppGetEditItemSuccessState extends AppStates {}
+
 
 class AppChangeBottomSheetState extends AppStates {}
 

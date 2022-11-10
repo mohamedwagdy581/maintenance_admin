@@ -203,6 +203,34 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  // Create and Add Item To Firebase List
+  Future createItem({required String name, required String collection, required String key}) async
+  {
+    // Reference Document
+    final docUser = FirebaseFirestore.instance.collection(collection).doc(name);
+    final json = {key : name};
+
+    // Create document and Write Data to Firebase
+    await docUser.set(json);
+    emit(AppGetCreateItemSuccessState());
+  }
+
+  // Update Items
+  Future updateItem({required String collection, required String key, required index,}) async
+  {
+    final docUser = FirebaseFirestore.instance.collection(collection).doc(index);
+    docUser.update({key: FieldValue.delete()});
+  }
+
+  // Delete Items
+  Future deleteItem({required String collection, required index}) async
+  {
+    final docUser = FirebaseFirestore.instance.collection(collection).doc(index);
+    docUser.delete();
+    getCitiesId();
+    emit(AppGetDeleteItemSuccessState());
+  }
+
   bool isBottomSheetShown = false;
   IconData fabIcon = Icons.edit;
 

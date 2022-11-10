@@ -5,9 +5,6 @@ import 'package:maintenance_admin/modules/update_customer_home/update_machine_ty
 import 'package:maintenance_admin/modules/update_customer_home/update_machines/update_machines.dart';
 import 'package:maintenance_admin/shared/components/components.dart';
 
-import '../requests/archived_requests/archived_requests_screen.dart';
-import '../requests/done_requests/done_requests_screen.dart';
-import '../technicals/all_technicals/all_technicals_screen.dart';
 
 class UpdateCustomerHome extends StatefulWidget {
   const UpdateCustomerHome({Key? key}) : super(key: key);
