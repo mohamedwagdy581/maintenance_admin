@@ -6,7 +6,8 @@ import 'package:maintenance_admin/shared/components/components.dart';
 import '../../../shared/network/cubit/cubit.dart';
 
 class ArchivedRequestsScreen extends StatelessWidget {
-  const ArchivedRequestsScreen({Key? key}) : super(key: key);
+  final String city;
+  const ArchivedRequestsScreen({Key? key, required this.city}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class ArchivedRequestsScreen extends StatelessWidget {
         title: const Text('Archived Requests'),
       ),
       body: FutureBuilder(
-        future: cubit.getArchivedDocId(),
+        future: cubit.getArchivedDocId(city: city),
         builder: (context, snapshot) {
           return ListView.separated(
             physics: const BouncingScrollPhysics(),
@@ -28,44 +29,16 @@ class ArchivedRequestsScreen extends StatelessWidget {
                 navigateTo(
                     context,
                     RequestDetails(
-                      requestCompanyName: GetRequestsData(
-                        collection: 'archivedRequests',
-                        documentId: cubit.archivedDocIDs[index],
-                        documentDataKey: 'companyName',
-                      ),
-                      requestCompanyCity: GetRequestsData(
-                        collection: 'archivedRequests',
-                        documentId: cubit.archivedDocIDs[index],
-                        documentDataKey: 'city',
-                      ),
-                      requestCompanySchool: GetRequestsData(
-                        collection: 'archivedRequests',
-                        documentId: cubit.archivedDocIDs[index],
-                        documentDataKey: 'school',
-                      ),
-                      requestCompanyMachine: GetRequestsData(
-                        collection: 'archivedRequests',
-                        documentId: cubit.archivedDocIDs[index],
-                        documentDataKey: 'machine',
-                      ),
-                      requestCompanyMachineType: GetRequestsData(
-                        collection: 'archivedRequests',
-                        documentId: cubit.archivedDocIDs[index],
-                        documentDataKey: 'machineType',
-                      ),
-                      requestCompanyConsultation: GetRequestsData(
-                        collection: 'archivedRequests',
-                        documentId: cubit.archivedDocIDs[index],
-                        documentDataKey: 'consultation',
-                      ),
-                      /*archivedRequestsData: archivedRequests[index],
-                      doneRequestsData: doneRequests[index],*/
-                    ));
+                      city: city,
+                      currentIndex: index,
+                    ),
+                );
                 //print(cubit.docIDs[index]);
               },
               title: Container(
                 alignment: AlignmentDirectional.center,
                 child: GetRequestsData(
+                  city: city,
                   collection: 'archivedRequests',
                   documentId: cubit.archivedDocIDs[index],
                   documentDataKey: 'technicalName',

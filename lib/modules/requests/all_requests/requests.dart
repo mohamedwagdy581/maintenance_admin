@@ -7,7 +7,8 @@ import '../../request_details/request_details.dart';
 import 'get_requests_data.dart';
 
 class AllRequests extends StatelessWidget {
-  const AllRequests({Key? key}) : super(key: key);
+  final String city;
+  const AllRequests({Key? key, required this.city}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class AllRequests extends StatelessWidget {
       ),
       // ***********************  The Scaffold Body  ***********************
       body: FutureBuilder(
-        future: cubit.getAllDocId(),
+        future: cubit.getAllDocId(city: city),
         builder: (context, snapshot) {
           return ListView.separated(
             physics: const BouncingScrollPhysics(),
@@ -44,45 +45,15 @@ class AllRequests extends StatelessWidget {
                 navigateTo(
                     context,
                     RequestDetails(
-                      requestCompanyName: GetRequestsData(
-                        collection: 'requests',
-                        documentId: cubit.allDocIDs[index],
-                        documentDataKey: 'companyName',
-                      ),
-                      requestCompanyCity: GetRequestsData(
-                        collection: 'requests',
-                        documentId: cubit.allDocIDs[index],
-                        documentDataKey: 'city',
-                      ),
-                      requestCompanySchool: GetRequestsData(
-                        collection: 'requests',
-                        documentId: cubit.allDocIDs[index],
-                        documentDataKey: 'school',
-                      ),
-                      requestCompanyMachine: GetRequestsData(
-                        collection: 'requests',
-
-                        documentId: cubit.allDocIDs[index],
-                        documentDataKey: 'machine',
-                      ),
-                      requestCompanyMachineType: GetRequestsData(
-                        collection: 'requests',
-                        documentId: cubit.allDocIDs[index],
-                        documentDataKey: 'machineType',
-                      ),
-                      requestCompanyConsultation: GetRequestsData(
-                        collection: 'requests',
-                        documentId: cubit.allDocIDs[index],
-                        documentDataKey: 'consultation',
-                      ),
-                      /*archivedRequestsData: archivedRequests[index],
-                      doneRequestsData: doneRequests[index],*/
+                      city: city,
+                      currentIndex: index,
                     ));
                 //print(cubit.docIDs[index]);
               },
               title: Container(
                 alignment: AlignmentDirectional.center,
                 child: GetRequestsData(
+                  city: city,
                   collection: 'requests',
                   documentId: cubit.allDocIDs[index],
                   documentDataKey: 'companyName',

@@ -39,7 +39,7 @@ class _UpdateCompaniesListState extends State<UpdateCities> {
           setState(() {});
         },
         child: FutureBuilder(
-          future: cubit.getCitiesId(),
+          future: cubit.getCitiesId(city: ''),
           builder: (context, snapshot) {
             return ListView.separated(
               shrinkWrap: true,
@@ -52,6 +52,7 @@ class _UpdateCompaniesListState extends State<UpdateCities> {
                   title: Container(
                     alignment: AlignmentDirectional.center,
                     child: GetRequestsData(
+                      city: '',
                       collection: 'cities',
                       documentId: cubit.allCities[index],
                       documentDataKey: 'city',
@@ -65,8 +66,8 @@ class _UpdateCompaniesListState extends State<UpdateCities> {
                         collection: 'cities',
                         key: 'city',
                         index: cubit.allCities[index],
+                        updatedName: updateCityController.text,
                       );
-
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10.0),

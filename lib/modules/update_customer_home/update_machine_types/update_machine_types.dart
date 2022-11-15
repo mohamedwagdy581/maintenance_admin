@@ -31,10 +31,11 @@ class _UpdateCompaniesListState extends State<UpdateMachineTypes> {
       body: RefreshIndicator(
         onRefresh: () async {
           cubit.allMachineTypes.clear();
+          machineTypeController.clear();
           setState(() {});
         },
         child: FutureBuilder(
-          future: cubit.getMachineTypesId(),
+          future: cubit.getMachineTypesId(city: ''),
           builder: (context, snapshot) {
             return ListView.separated(
               shrinkWrap: true,
@@ -46,17 +47,21 @@ class _UpdateCompaniesListState extends State<UpdateMachineTypes> {
                 title: Container(
                   alignment: AlignmentDirectional.center,
                   child: GetRequestsData(
+                    city: '',
                     collection: 'machineTypes',
                     documentId: cubit.allMachineTypes[index],
                     documentDataKey: 'machineTypeName',
                   ),
                 ),
                 leadingWidget: InkWell(
-                  onTap: () {
+                  onTap: () async {
+                    final updatedName = await openDialog();
+                    if(updatedName == null || updatedName.isEmpty) return;
                     cubit.updateItem(
                       collection: 'machineTypes',
                       key: 'machineTypeName',
                       index: cubit.allMachineTypes[index],
+                      updatedName: machineTypeController.text,
                     );
                   },
                   child: Padding(
@@ -198,4 +203,38 @@ class _UpdateCompaniesListState extends State<UpdateMachineTypes> {
       ),
     );
   }
+
+  Future<String?> openDialog() => showDialog<String>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Update City'),
+      content: defaultTextFormField(
+        controller: machineTypeController,
+        keyboardType: TextInputType.visiblePassword,
+        label: 'Update City',
+        textStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
+          color: AppCubit.get(context).isDark
+              ? Colors.black
+              : Colors.white,
+        ),
+        validator: (String? value) {
+          if (value!.isEmpty) {
+            return 'Please Enter City Name';
+          }
+          return null;
+        },
+        prefix: Icons.location_city_rounded,
+        prefixColor:
+        AppCubit.get(context).isDark ? Colors.black : Colors.white,
+      ),
+      actions: [
+        defaultTextButton(
+          onPressed: () {
+            Navigator.of(context).pop(machineTypeController.text);
+          },
+          text: 'Update',
+        ),
+      ],
+    ),
+  );
 }

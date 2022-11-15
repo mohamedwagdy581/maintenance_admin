@@ -6,7 +6,8 @@ import '../../../shared/network/cubit/cubit.dart';
 import '../../request_details/request_details.dart';
 
 class DoneRequestsScreen extends StatelessWidget {
-  const DoneRequestsScreen({Key? key}) : super(key: key);
+  final String city;
+  const DoneRequestsScreen({Key? key, required this.city}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class DoneRequestsScreen extends StatelessWidget {
         title: const Text('Done Requests'),
       ),
       body: FutureBuilder(
-        future: cubit.getDoneDocId(),
+        future: cubit.getDoneDocId(city: city),
         builder: (context, snapshot) {
           return ListView.separated(
             physics: const BouncingScrollPhysics(),
@@ -28,40 +29,12 @@ class DoneRequestsScreen extends StatelessWidget {
                 navigateTo(
                     context,
                     RequestDetails(
-                      requestCompanyName: GetRequestsData(
-                        collection: 'doneRequests',
-                        documentId: cubit.doneDocIDs[index],
-                        documentDataKey: 'companyName',
-                      ),
-                      requestCompanyCity: GetRequestsData(
-                        collection: 'doneRequests',
-                        documentId: cubit.doneDocIDs[index],
-                        documentDataKey: 'city',
-                      ),
-                      requestCompanySchool: GetRequestsData(
-                        collection: 'doneRequests',
-                        documentId: cubit.doneDocIDs[index],
-                        documentDataKey: 'school',
-                      ),
-                      requestCompanyMachine: GetRequestsData(
-                        collection: 'doneRequests',
-
-                        documentId: cubit.doneDocIDs[index],
-                        documentDataKey: 'machine',
-                      ),
-                      requestCompanyMachineType: GetRequestsData(
-                        collection: 'doneRequests',
-                        documentId: cubit.doneDocIDs[index],
-                        documentDataKey: 'machineType',
-                      ),
-                      requestCompanyConsultation: GetRequestsData(
-                        collection: 'doneRequests',
-                        documentId: cubit.doneDocIDs[index],
-                        documentDataKey: 'consultation',
-                      ),
+                      city: city,
+                      currentIndex: index,
                     ));
               },
               title: GetRequestsData(
+                city: city,
                 collection: 'doneRequests',
                 documentId: cubit.doneDocIDs[index],
                 documentDataKey: 'companyName',

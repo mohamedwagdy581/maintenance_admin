@@ -16,11 +16,11 @@ class AppCubit extends Cubit<AppStates> {
   // Get Document IDs to start access to all data in document in firebase
   List<String> allUsers = [];
 
-  Future getAllUsers() async
+  Future getAllUsers({required String city}) async
   {
     emit(AppGetUsersLoadingState());
     allUsers.clear();
-    await FirebaseFirestore.instance.collection('users').get().then((
+    await FirebaseFirestore.instance.collection(city).doc(city).collection('users').get().then((
         snapshot) {
       for (var document in snapshot.docs) {
         allUsers.add(document.reference.id);
@@ -35,11 +35,11 @@ class AppCubit extends Cubit<AppStates> {
   // Get Document IDs to start access to all data in document in firebase
   List<String> allTechnicals = [];
 
-  Future getAllTechnicals() async
+  Future getAllTechnicals({required String city}) async
   {
     emit(AppGetTechnicalsLoadingState());
     allTechnicals.clear();
-    await FirebaseFirestore.instance.collection('technicals').get().then((
+    await FirebaseFirestore.instance.collection(city).doc(city).collection('technicals').get().then((
         snapshot) {
       for (var document in snapshot.docs) {
         allTechnicals.add(document.reference.id);
@@ -68,11 +68,11 @@ class AppCubit extends Cubit<AppStates> {
   // Get Document IDs to start access to all data in document in firebase
   List<String> allDocIDs = [];
 
-  Future getAllDocId() async
+  Future getAllDocId({required String city}) async
   {
     emit(AppGetDocIDsLoadingState());
     allDocIDs.clear();
-    await FirebaseFirestore.instance.collection('requests').get().then((
+    await FirebaseFirestore.instance.collection(city).doc(city).collection('requests').get().then((
         snapshot) {
       for (var document in snapshot.docs) {
         allDocIDs.add(document.reference.id);
@@ -87,11 +87,11 @@ class AppCubit extends Cubit<AppStates> {
   // Get Document IDs to start access to all data in document in firebase
   List<String> doneDocIDs = [];
 
-  Future getDoneDocId() async
+  Future getDoneDocId({required String city}) async
   {
     emit(AppGetDoneDocIDsLoadingState());
     doneDocIDs.clear();
-    await FirebaseFirestore.instance.collection('doneRequests').get().then((
+    await FirebaseFirestore.instance.collection(city).doc(city).collection('doneRequests').get().then((
         snapshot) {
       for (var document in snapshot.docs) {
         doneDocIDs.add(document.reference.id);
@@ -107,11 +107,11 @@ class AppCubit extends Cubit<AppStates> {
   // Get Document IDs to start access to all data in document in firebase
   List<String> archivedDocIDs = [];
 
-  Future getArchivedDocId() async
+  Future getArchivedDocId({required String city}) async
   {
     archivedDocIDs.clear();
     emit(AppGetArchivedDocIDsLoadingState());
-    await FirebaseFirestore.instance.collection('archivedRequests').get().then((
+    await FirebaseFirestore.instance.collection(city).doc(city).collection('archivedRequests').get().then((
         snapshot) {
       for (var document in snapshot.docs) {
         archivedDocIDs.add(document.reference.id);
@@ -126,12 +126,12 @@ class AppCubit extends Cubit<AppStates> {
   // Get Cities IDs to start access to all data in document in firebase
   List<String> allCities = [];
 
-  Future getCitiesId() async
+  Future getCitiesId({required String city}) async
   {
 
     emit(AppGetCitiesLoadingState());
     allCities.clear();
-    await FirebaseFirestore.instance.collection('cities').get().then((
+    await FirebaseFirestore.instance.collection(city).doc(city).collection('cities').get().then((
         snapshot) {
       for (var document in snapshot.docs) {
         allCities.add(document.reference.id);
@@ -146,12 +146,12 @@ class AppCubit extends Cubit<AppStates> {
   // Get Companies IDs to start access to all data in document in firebase
   List<String> allCompanies = [];
 
-  Future getCompaniesId() async
+  Future getCompaniesId({required String city}) async
   {
 
     emit(AppGetCompaniesLoadingState());
     allCompanies.clear();
-    await FirebaseFirestore.instance.collection('companies').get().then((
+    await FirebaseFirestore.instance.collection(city).doc(city).collection('companies').get().then((
         snapshot) {
       for (var document in snapshot.docs) {
         allCompanies.add(document.reference.id);
@@ -166,12 +166,12 @@ class AppCubit extends Cubit<AppStates> {
   // Get Machines IDs to start access to all data in document in firebase
   List<String> allMachines = [];
 
-  Future getMachinesId() async
+  Future getMachinesId({required String city}) async
   {
 
     emit(AppGetMachinesLoadingState());
     allMachines.clear();
-    await FirebaseFirestore.instance.collection('machines').get().then((
+    await FirebaseFirestore.instance.collection(city).doc(city).collection('machines').get().then((
         snapshot) {
       for (var document in snapshot.docs) {
         allMachines.add(document.reference.id);
@@ -186,12 +186,12 @@ class AppCubit extends Cubit<AppStates> {
   // Get Machines IDs to start access to all data in document in firebase
   List<String> allMachineTypes = [];
 
-  Future getMachineTypesId() async
+  Future getMachineTypesId({required String city}) async
   {
 
     emit(AppGetMachineTypesLoadingState());
     allMachineTypes.clear();
-    await FirebaseFirestore.instance.collection('machineTypes').get().then((
+    await FirebaseFirestore.instance.collection(city).doc(city).collection('machineTypes').get().then((
         snapshot) {
       for (var document in snapshot.docs) {
         allMachineTypes.add(document.reference.id);
@@ -216,10 +216,10 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   // Update Items
-  Future updateItem({required String collection, required String key, required index,}) async
+  Future updateItem({required String collection, required String key, required index, required updatedName,}) async
   {
     final docUser = FirebaseFirestore.instance.collection(collection).doc(index);
-    docUser.update({key: FieldValue.delete()});
+    docUser.update({key: updatedName});
   }
 
   // Delete Items
@@ -227,7 +227,7 @@ class AppCubit extends Cubit<AppStates> {
   {
     final docUser = FirebaseFirestore.instance.collection(collection).doc(index);
     docUser.delete();
-    getCitiesId();
+    //getCitiesId();
     emit(AppGetDeleteItemSuccessState());
   }
 

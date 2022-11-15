@@ -6,7 +6,8 @@ import '../../../shared/components/components.dart';
 import '../../../shared/network/cubit/cubit.dart';
 
 class AllUsersScreen extends StatelessWidget {
-  const AllUsersScreen({Key? key}) : super(key: key);
+  final String city;
+  const AllUsersScreen({Key? key, required this.city}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class AllUsersScreen extends StatelessWidget {
       ),
       // ***********************  The Scaffold Body  ***********************
       body: FutureBuilder(
-        future: cubit.getAllUsers(),
+        future: cubit.getAllUsers(city: city),
         builder: (context, snapshot) {
           return ListView.separated(
             physics: const BouncingScrollPhysics(),
@@ -35,6 +36,7 @@ class AllUsersScreen extends StatelessWidget {
                 //print(cubit.docIDs[index]);
               },
               title: GetRequestsData(
+                city: city,
                 documentId: cubit.allUsers[index],
                 documentDataKey: 'name',
                 collection: 'users',

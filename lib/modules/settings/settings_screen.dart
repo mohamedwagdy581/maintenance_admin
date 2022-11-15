@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:maintenance_admin/modules/history/history.dart';
+import 'package:maintenance_admin/modules/register/register_screen.dart';
 import 'package:maintenance_admin/modules/update_customer_home/update_customer_home.dart';
 
 import '../../shared/components/components.dart';
@@ -67,7 +67,6 @@ class SettingsScreen extends StatelessWidget {
               title: 'Update Customer Home',
               subTitle: 'Update Lists of Company and Devices',
             ),
-
             SizedBox(
               height: height * 0.033,
             ),
@@ -75,12 +74,12 @@ class SettingsScreen extends StatelessWidget {
             customListTile(
               context: context,
               onTap: () {
-                navigateTo(context, const HistoryScreen());
+                navigateTo(context, RegisterScreen());
               },
-              prefixIcon: Icons.history_outlined,
+              prefixIcon: Icons.add,
               suffixIcon: Icons.chevron_right,
-              title: 'History',
-              subTitle: 'See All Requests history',
+              title: 'Add User',
+              subTitle: 'Add User Details',
             ),
 
             SizedBox(

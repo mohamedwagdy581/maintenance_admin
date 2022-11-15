@@ -37,7 +37,7 @@ class _UpdateCompaniesListState extends State<UpdateCompaniesList> {
           });
         },
         child: FutureBuilder(
-          future: cubit.getCompaniesId(),
+          future: cubit.getCompaniesId(city: ''),
           builder: (context, snapshot) {
             return ListView.separated(
               shrinkWrap: true,
@@ -48,17 +48,21 @@ class _UpdateCompaniesListState extends State<UpdateCompaniesList> {
                 title: Container(
                   alignment: AlignmentDirectional.center,
                   child: GetRequestsData(
+                    city: '',
                     collection: 'companies',
                     documentId: cubit.allCompanies[index],
                     documentDataKey: 'companyName',
                   ),
                 ),
                 leadingWidget: InkWell(
-                  onTap: () {
+                  onTap: () async {
+                    final updatedName = await openDialog();
+                    if(updatedName == null || updatedName.isEmpty) return;
                     cubit.updateItem(
                       collection: 'companies',
                       key: 'companyName',
                       index: cubit.allCompanies[index],
+                      updatedName: companyController.text,
                     );
                   },
                   child: Padding(
@@ -200,4 +204,37 @@ class _UpdateCompaniesListState extends State<UpdateCompaniesList> {
       ),
     );
   }
+  Future<String?> openDialog() => showDialog<String>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Update City'),
+      content: defaultTextFormField(
+        controller: companyController,
+        keyboardType: TextInputType.visiblePassword,
+        label: 'Update City',
+        textStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
+          color: AppCubit.get(context).isDark
+              ? Colors.black
+              : Colors.white,
+        ),
+        validator: (String? value) {
+          if (value!.isEmpty) {
+            return 'Please Enter City Name';
+          }
+          return null;
+        },
+        prefix: Icons.location_city_rounded,
+        prefixColor:
+        AppCubit.get(context).isDark ? Colors.black : Colors.white,
+      ),
+      actions: [
+        defaultTextButton(
+          onPressed: () {
+            Navigator.of(context).pop(companyController.text);
+          },
+          text: 'Update',
+        ),
+      ],
+    ),
+  );
 }

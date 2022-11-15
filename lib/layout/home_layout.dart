@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maintenance_admin/modules/requests/all_requests/requests.dart';
-import 'package:maintenance_admin/modules/requests/archived_requests/archived_requests_screen.dart';
-import 'package:maintenance_admin/modules/requests/done_requests/done_requests_screen.dart';
+import 'package:maintenance_admin/modules/abo_areesh/abo_areesh_screen.dart';
+import 'package:maintenance_admin/modules/al_ahad/al_ahad_screen.dart';
+import 'package:maintenance_admin/modules/al_ardah/al_ardah_screen.dart';
 import 'package:maintenance_admin/modules/settings/settings_screen.dart';
-import 'package:maintenance_admin/modules/users/all_users/all_users_screen.dart';
 import 'package:maintenance_admin/shared/components/components.dart';
 
-import '../modules/technicals/all_technicals/all_technicals_screen.dart';
+import '../modules/jazan/jazan_screen.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({Key? key}) : super(key: key);
@@ -36,42 +35,40 @@ class HomeLayout extends StatelessWidget {
       body: ListView(
         //mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const SizedBox(height: 100.0,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               customCard(
                   onTap: () {
-                    navigateTo(context, const AllRequests());
+                    navigateTo(context, const JazanScreen(title: 'جازان',));
                   },
-                  title: 'All Requests'),
+                  title: 'جازان',
+              ),
               customCard(
                   onTap: () {
-                    navigateTo(context, const DoneRequestsScreen());
+                    navigateTo(context, const AboAreeshScreen(title: 'أبوعريش',));
                   },
-                  title: 'Done Requests'),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              customCard(
-                  onTap: () {
-                    navigateTo(context, const ArchivedRequestsScreen());
-                  },
-                  title: 'Archived Requests'),
-              customCard(
-                  onTap: () {
-                    navigateTo(context, const AllTechnicalsScreen());
-                  },
-                  title: 'All Technicals',
+                  title: 'أبو عريش',
               ),
             ],
           ),
-          customCard(
-            onTap: () {
-              navigateTo(context, const AllUsersScreen());
-            },
-            title: 'All Users',
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              customCard(
+                  onTap: () {
+                    navigateTo(context, const AlAhadScreen(title: 'أحدالمسارحة',));
+                  },
+                  title: 'أحد المسارحة',
+              ),
+              customCard(
+                  onTap: () {
+                    navigateTo(context, const AlArdahScreen(title: 'العارضة',));
+                  },
+                  title: 'العارضة',
+              ),
+            ],
           ),
         ],
       ),

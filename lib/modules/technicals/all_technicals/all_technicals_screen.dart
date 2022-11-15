@@ -6,7 +6,8 @@ import '../../../shared/components/components.dart';
 import '../../../shared/network/cubit/cubit.dart';
 
 class AllTechnicalsScreen extends StatelessWidget {
-  const AllTechnicalsScreen({Key? key}) : super(key: key);
+  final String city;
+  const AllTechnicalsScreen({Key? key, required this.city}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class AllTechnicalsScreen extends StatelessWidget {
       ),
       // ***********************  The Scaffold Body  ***********************
       body: FutureBuilder(
-        future: cubit.getAllTechnicals(),
+        future: cubit.getAllTechnicals(city: city),
         builder: (context, snapshot) {
           return ListView.separated(
             physics: const BouncingScrollPhysics(),
@@ -38,6 +39,7 @@ class AllTechnicalsScreen extends StatelessWidget {
                 //print(cubit.docIDs[index]);
               },
               title: GetRequestsData(
+                city: '',
                 documentId: cubit.allTechnicals[index],
                 documentDataKey: 'name',
                   collection: 'technicals',
