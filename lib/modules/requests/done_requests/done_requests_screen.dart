@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:maintenance_admin/modules/requests/all_requests/done_archived_details_screen.dart';
 import 'package:maintenance_admin/modules/requests/all_requests/get_requests_data.dart';
 import 'package:maintenance_admin/shared/components/components.dart';
 
+import '../../../layout/home_layout.dart';
 import '../../../shared/network/cubit/cubit.dart';
 import '../../request_details/request_details.dart';
 
@@ -28,7 +30,9 @@ class DoneRequestsScreen extends StatelessWidget {
               onTapped: () {
                 navigateTo(
                     context,
-                    RequestDetails(
+                    DoneArchivedDetailsScreen(
+                      id: cubit.doneDocIDs[index],
+                      collection: 'doneRequests',
                       city: city,
                       currentIndex: index,
                     ));
@@ -61,6 +65,12 @@ class DoneRequestsScreen extends StatelessWidget {
             itemCount: cubit.doneDocIDs.length,
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          navigateAndFinish(context, const HomeLayout());
+        },
+        child: const Icon(Icons.home),
       ),
     );
   }

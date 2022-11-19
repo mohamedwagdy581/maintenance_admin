@@ -2,16 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../layout/home_layout.dart';
+import '../../../shared/components/components.dart';
 import '../../../shared/network/cubit/cubit.dart';
 import '../../../shared/network/cubit/states.dart';
 
 class UserDetailsScreen extends StatelessWidget {
   final int index;
-  const UserDetailsScreen({Key? key, required this.index}) : super(key: key);
+  final String city;
+  const UserDetailsScreen({Key? key, required this.index, required this.city}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance.collection('users').snapshots();
+    final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance.collection(city).doc(city).collection('users').snapshots();
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -38,6 +41,7 @@ class UserDetailsScreen extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
                         height: 190.0,
@@ -74,128 +78,37 @@ class UserDetailsScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 5.0,
+                        height: 10.0,
                       ),
-                      Text(
-                        storeDocs[index]['name'],
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
-                      Text(
-                        storeDocs[index]['email'],
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: InkWell(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      '100',
-                                      style: Theme.of(context).textTheme.subtitle2,
-                                    ),
-                                    const SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      'Posts',
-                                      style: Theme.of(context).textTheme.caption,
-                                    ),
-                                  ],
-                                ),
-                                onTap: () {},
-                              ),
-                            ),
-                            Expanded(
-                              child: InkWell(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      '265',
-                                      style: Theme.of(context).textTheme.subtitle2,
-                                    ),
-                                    const SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      'Photos',
-                                      style: Theme.of(context).textTheme.caption,
-                                    ),
-                                  ],
-                                ),
-                                onTap: () {},
-                              ),
-                            ),
-                            Expanded(
-                              child: InkWell(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      '10K',
-                                      style: Theme.of(context).textTheme.subtitle2,
-                                    ),
-                                    const SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      'Followers',
-                                      style: Theme.of(context).textTheme.caption,
-                                    ),
-                                  ],
-                                ),
-                                onTap: () {},
-                              ),
-                            ),
-                            Expanded(
-                              child: InkWell(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      '340',
-                                      style: Theme.of(context).textTheme.subtitle2,
-                                    ),
-                                    const SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      'Followings',
-                                      style: Theme.of(context).textTheme.caption,
-                                    ),
-                                  ],
-                                ),
-                                onTap: () {},
-                              ),
-                            ),
-                          ],
-                        ),
+
+                      buildUserDetails(
+                        context: context,
+                        text: 'User Name : ',
+                        title: storeDocs[index]['name'],
                       ),
                       const SizedBox(
                         height: 10.0,
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: OutlinedButton(
-                              onPressed: () {},
-                              child: const Text('Add Photos'),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          OutlinedButton(
-                            onPressed: ()
-                            {
-                              //navigateTo(context, EditProfileScreen());
-                            },
-                            child: const Icon(Icons.edit),
-                          ),
-                        ],
+                      buildUserDetails(
+                        context: context,
+                        text: 'User ID : ',
+                        title: storeDocs[index]['id'],
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      buildUserDetails(
+                        context: context,
+                        text: 'User Email : ',
+                        title: storeDocs[index]['email'],
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      buildUserDetails(
+                        context: context,
+                        text: 'User Phone : ',
+                        title: storeDocs[index]['phone'],
                       ),
                     ],
                   ),
@@ -206,8 +119,31 @@ class UserDetailsScreen extends StatelessWidget {
               }
             },
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              navigateAndFinish(context, const HomeLayout());
+            },
+            child: const Icon(Icons.home),
+          ),
         );
       },
     );
   }
+  Widget buildUserDetails(
+      {
+        required String text,
+        required String title,
+        required context,
+      }) =>Padding(
+    padding: const EdgeInsets.only(left: 10.0),
+    child: Wrap(
+      children: [
+        Text(text,style: const TextStyle(fontSize: 16.0),),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+      ],
+    ),
+  );
 }

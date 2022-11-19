@@ -2,21 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../layout/home_layout.dart';
+import '../../../shared/components/components.dart';
 import '../../../shared/network/cubit/cubit.dart';
 import '../../../shared/network/cubit/states.dart';
 
 class TechnicalDetailsScreen extends StatelessWidget {
   final int index;
+  final String city;
 
   const TechnicalDetailsScreen({
     super.key,
-    required this.index,
+    required this.index, required this.city,
 
   });
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance.collection('technicals').snapshots();
+    final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance.collection(city).doc(city).collection('technicals').snapshots();
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -94,7 +97,7 @@ class TechnicalDetailsScreen extends StatelessWidget {
                       buildTechnicalDetails(
                         context: context,
                         text: 'Technical ID : ',
-                        title: storeDocs[index]['uId'],
+                        title: storeDocs[index]['id'],
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -120,6 +123,12 @@ class TechnicalDetailsScreen extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator(),);
               }
             },
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              navigateAndFinish(context, const HomeLayout());
+            },
+            child: const Icon(Icons.home),
           ),
         );
       },

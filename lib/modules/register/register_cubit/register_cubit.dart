@@ -83,7 +83,7 @@ class RegisterCubit extends Cubit<RegisterStates>
 
     FirebaseFirestore.instance
         .collection(area)
-        .doc(area).collection('users').doc()
+        .doc(area).collection('users').doc(uId)
         .set(model.toMap())
         .then((value)
     {

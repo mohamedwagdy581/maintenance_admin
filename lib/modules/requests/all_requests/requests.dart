@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maintenance_admin/modules/settings/settings_screen.dart';
 import 'package:maintenance_admin/shared/components/components.dart';
 
+import '../../../layout/home_layout.dart';
 import '../../../shared/network/cubit/cubit.dart';
 import '../../request_details/request_details.dart';
 import 'get_requests_data.dart';
@@ -45,6 +46,7 @@ class AllRequests extends StatelessWidget {
                 navigateTo(
                     context,
                     RequestDetails(
+                      id: cubit.allDocIDs[index],
                       city: city,
                       currentIndex: index,
                     ));
@@ -81,6 +83,12 @@ class AllRequests extends StatelessWidget {
             itemCount: cubit.allDocIDs.length,
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          navigateAndFinish(context, const HomeLayout());
+        },
+        child: const Icon(Icons.home),
       ),
     );
   }

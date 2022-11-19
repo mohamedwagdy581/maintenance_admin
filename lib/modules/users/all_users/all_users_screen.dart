@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maintenance_admin/modules/requests/all_requests/get_requests_data.dart';
 import 'package:maintenance_admin/modules/users/user_details/user_details_screen.dart';
 
+import '../../../layout/home_layout.dart';
 import '../../../shared/components/components.dart';
 import '../../../shared/network/cubit/cubit.dart';
 
@@ -32,7 +33,7 @@ class AllUsersScreen extends StatelessWidget {
               onTapped: () {
                 navigateTo(
                     context,
-                    UserDetailsScreen(index: index,));
+                    UserDetailsScreen(index: index, city: city,));
                 //print(cubit.docIDs[index]);
               },
               title: GetRequestsData(
@@ -63,6 +64,12 @@ class AllUsersScreen extends StatelessWidget {
             itemCount: cubit.allUsers.length,
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          navigateAndFinish(context, const HomeLayout());
+        },
+        child: const Icon(Icons.home),
       ),
     );
   }

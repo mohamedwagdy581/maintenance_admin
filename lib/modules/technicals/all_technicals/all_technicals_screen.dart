@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maintenance_admin/modules/requests/all_requests/get_requests_data.dart';
 import 'package:maintenance_admin/modules/technicals/technical_details/technical_details_screen.dart';
 
+import '../../../layout/home_layout.dart';
 import '../../../shared/components/components.dart';
 import '../../../shared/network/cubit/cubit.dart';
 
@@ -34,12 +35,13 @@ class AllTechnicalsScreen extends StatelessWidget {
                   context,
                   TechnicalDetailsScreen(
                     index: index,
+                    city: city,
                   ),
                 );
                 //print(cubit.docIDs[index]);
               },
               title: GetRequestsData(
-                city: '',
+                city: city,
                 documentId: cubit.allTechnicals[index],
                 documentDataKey: 'name',
                   collection: 'technicals',
@@ -66,6 +68,12 @@ class AllTechnicalsScreen extends StatelessWidget {
             itemCount: cubit.allTechnicals.length,
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          navigateAndFinish(context, const HomeLayout());
+        },
+        child: const Icon(Icons.home),
       ),
     );
   }

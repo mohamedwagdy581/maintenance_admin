@@ -5,13 +5,12 @@ import 'package:maintenance_admin/layout/home_layout.dart';
 
 import '../../shared/components/components.dart';
 import '../../shared/network/cubit/cubit.dart';
-import '../login/login_screen.dart';
 import 'register_cubit/register_cubit.dart';
 import 'register_cubit/register_states.dart';
 
 // ignore: must_be_immutable
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -173,7 +172,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 setState(() {
                                   _areaValue = areas.indexOf(value!);
                                   _area = value.toString();
-                                  print(_area);
                                 });
                               },
                             ),

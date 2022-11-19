@@ -1,20 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../layout/home_layout.dart';
+import '../../models/locationServices.dart';
+import '../../shared/components/components.dart';
 
-class RequestDetails extends StatelessWidget {
+
+class RequestDetails extends StatefulWidget {
+  final String id;
   final int currentIndex;
   final String city;
 
   const RequestDetails({
     super.key,
-    required this.currentIndex, required this.city,
+    required this.currentIndex, required this.city, required this.id,
   });
 
   @override
+  State<RequestDetails> createState() => _RequestDetailsState();
+}
+
+class _RequestDetailsState extends State<RequestDetails> {
+  @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance.collection(city).doc(city).collection('requests').snapshots();
+    final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance.collection(widget.city).doc(widget.city).collection('requests').snapshots();
 
     return Scaffold(
       appBar: AppBar(),
@@ -36,7 +46,10 @@ class RequestDetails extends StatelessWidget {
             }).toList();
             return ListView.builder(
               itemCount: 1,
-              itemBuilder: (context, index) => Column(
+              itemBuilder: (context, index) {
+                var latitude = storeDocs[widget.currentIndex]['latitude'];
+                var longitude = storeDocs[widget.currentIndex]['longitude'];
+                return Column(
                 children: [
                   SizedBox(
                     height: height * 0.1,
@@ -61,7 +74,7 @@ class RequestDetails extends StatelessWidget {
                           children: [
                             customTableKeyCell(text: 'Company Name', context: context),
                             customTableValueCell(
-                              text: storeDocs[currentIndex]['companyName'],
+                              text: storeDocs[widget.currentIndex]['companyName'],
                             ),
                           ],
                         ),
@@ -69,7 +82,7 @@ class RequestDetails extends StatelessWidget {
                           children: [
                             customTableKeyCell(text: 'City', context: context),
                             customTableValueCell(
-                              text: storeDocs[currentIndex]['city'],
+                              text: storeDocs[widget.currentIndex]['city'],
                             ),
                           ],
                         ),
@@ -77,23 +90,40 @@ class RequestDetails extends StatelessWidget {
                           children: [
                             customTableKeyCell(text: 'School', context: context),
                             customTableValueCell(
-                              text: storeDocs[currentIndex]['school'],
+                              text: storeDocs[widget.currentIndex]['school'],
                             ),
                           ],
                         ),
                         TableRow(
                           children: [
-                            customTableKeyCell(text: 'Location', context: context),
+                            customTableKeyCell(text: 'Phone', context: context),
                             customTableValueCell(
-                              text: 'Latitude: ${storeDocs[currentIndex]['latitude']},',
+                              text: storeDocs[widget.currentIndex]['phone'],
                             ),
                           ],
                         ),
                         TableRow(
                           children: [
-                            customTableKeyCell(text: 'Location', context: context),
-                            customTableValueCell(
-                              text: 'Longitude: ${storeDocs[currentIndex]['longitude']},',
+                            customTableKeyCell(
+                                text: 'Location', context: context),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              margin: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 20.0,
+                              ),
+                              child: Column(
+                                children: [
+                                  defaultTextButton(
+                                    onPressed: ()
+                                    {
+                                      //locationServices.goToLocation(latitude: latitude, longitude: longitude);
+                                      MapUtils.openMap(latitude: latitude, longitude: longitude);
+                                    },
+                                    text: 'Tap To Location',
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -101,7 +131,7 @@ class RequestDetails extends StatelessWidget {
                           children: [
                             customTableKeyCell(text: 'Machine', context: context),
                             customTableValueCell(
-                              text: storeDocs[currentIndex]['machine'],
+                              text: storeDocs[widget.currentIndex]['machine'],
                             ),
                           ],
                         ),
@@ -110,7 +140,7 @@ class RequestDetails extends StatelessWidget {
                           children: [
                             customTableKeyCell(text: 'Consultation', context: context),
                             customTableValueCell(
-                              text: storeDocs[currentIndex]['consultation'],
+                              text: storeDocs[widget.currentIndex]['consultation'],
                             ),
                           ],
                         ),
@@ -120,25 +150,60 @@ class RequestDetails extends StatelessWidget {
                   SizedBox(
                     height: height * 0.1,
                   ),
-                  customRequestAction(
-                    onTap: ()
+
+                  customButton(
+                      onPressed: ()
+
+                  {
+                    _showDoneAndArchivedDialog(context: context, doneOnPressed: ()
                     {
-                      /*navigateTo(context, FinishingRequestScreen(
-                        id: id,
-                        requestCompanyName: storeDocs[currentIndex]['companyName'],
-                        requestCompanyCity: storeDocs[currentIndex]['city'],
-                        requestCompanySchool: storeDocs[currentIndex]['school'],
-                        requestCompanyMachine: storeDocs[currentIndex]['machine'],
-                        requestCompanyMachineType: storeDocs[currentIndex]['machineType'],
-                      ));*/
-                      //AppCubit.get(context).updateData(status: 'done', id: doneRequestsData!['id']);
+                      /*RequestCubit.get(context).technicalDoneRequest(
+                        city: city.toString(),
+                        companyName: companyName.toString(),
+                        school: school.toString(),
+                        machineImage: machineImageUrl,
+                        machineTypeImage: machineTypeImageUrl,
+                        damageImage: damageImageUrl,
+                        consultation: consultation.toString(),
+                        longitude: longitude,
+                        latitude: latitude,
+                      );*/
+                      FirebaseFirestore.instance.collection(widget.city).doc(widget.city).collection('requests').doc(widget.id).delete();
+
+                      showToast(
+                        message:
+                        'Request Done Successfully',
+                        state: ToastStates.SUCCESS,
+                      );
+                      navigateAndFinish(context, const HomeLayout());
+                    }, archivedOnPressed: () {
+                      /*RequestCubit.get(context).technicalArchivedRequest(
+                        city: city.toString(),
+                        companyName: companyName.toString(),
+                        school: school.toString(),
+                        machineImage: machineImageUrl,
+                        machineTypeImage: machineTypeImageUrl,
+                        damageImage: damageImageUrl,
+                        consultation: consultation.toString(),
+                        longitude: longitude,
+                        latitude: latitude,
+                      );*/
+
+                      FirebaseFirestore.instance.collection(widget.city).doc(widget.city).collection('requests').doc(widget.id).delete();
+
+                      showToast(
+                        message:
+                        'Request still Archived',
+                        state: ToastStates.WARNING,
+                      );
+                      navigateAndFinish(context, const HomeLayout());
                     },
-                    backgroundColor: Colors.green,
-                    icon: Icons.done,
-                    label: 'Start Finish Request',
+                    );
+                  }, text: 'Finish',
                   ),
                 ],
-              ),
+              );
+                },
             );
           }else
           {
@@ -210,4 +275,21 @@ class RequestDetails extends StatelessWidget {
           ),
         ),
       );
+
+  Future<bool> _showDoneAndArchivedDialog(
+      {
+        context,
+        required VoidCallback doneOnPressed,
+        required VoidCallback archivedOnPressed,
+      }) async
+  {
+    return await showDialog(context: context, builder: (context) => AlertDialog(
+      title: const Text('Finishing Request'),
+      content: const Text('If Request is Done!, Enter the Done Button, if not Enter the Archive Button.'),
+      actions: [
+        customButton(onPressed: doneOnPressed, text: 'Done',backgroundColor: Colors.green,),
+        customButton(onPressed: archivedOnPressed, text: 'Archive',backgroundColor: Colors.red,),
+      ],
+    ));
+  }
 }
