@@ -1,6 +1,5 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,6 +20,7 @@ class RequestCubit extends Cubit<RequestStates>
         required String companyName,
         required String school,
         required String technicalPhone,
+        required String technicalName,
         required String customerPhone,
         required String machineImage,
         required String machineTypeImage,
@@ -31,7 +31,6 @@ class RequestCubit extends Cubit<RequestStates>
       })
   {
     emit(RequestLoadingState());
-    var user = FirebaseAuth.instance.currentUser;
 
     FirebaseFirestore.instance.collection(city).doc(city).collection('doneRequests').doc().get().then((value)
     {
@@ -39,7 +38,7 @@ class RequestCubit extends Cubit<RequestStates>
       createDoneRequest(
         city: city,
         companyName: companyName,
-        technicalName: user!.displayName.toString(),
+        technicalName: technicalName,
         school: school,
         technicalPhone: technicalPhone,
         customerPhone: customerPhone,
@@ -110,6 +109,7 @@ class RequestCubit extends Cubit<RequestStates>
         required String companyName,
         required String school,
         required String technicalPhone,
+        required String technicalName,
         required String customerPhone,
         required String machineImage,
         required String machineTypeImage,
@@ -120,7 +120,6 @@ class RequestCubit extends Cubit<RequestStates>
       })
   {
     emit(RequestLoadingState());
-    var user = FirebaseAuth.instance.currentUser;
 
     FirebaseFirestore.instance.collection(city).doc(city).collection('archivedRequests').doc().get().then((value)
     {
@@ -128,9 +127,9 @@ class RequestCubit extends Cubit<RequestStates>
       createArchivedRequest(
         city: city,
         companyName: companyName,
-        technicalName: user!.displayName.toString(),
         school: school,
         technicalPhone: technicalPhone,
+        technicalName: technicalName,
         customerPhone: customerPhone,
         machineImage: machineImage,
         uId: value.id.toString(),
