@@ -64,9 +64,6 @@ class _RequestDetailsState extends State<DoneArchivedDetailsScreen> {
                       var latitude = storeDocs[widget.currentIndex]['latitude'];
                       var longitude =
                           storeDocs[widget.currentIndex]['longitude'];
-
-                      XFile? damageImage;
-                      String damageImageUrl = storeDocs[widget.currentIndex]['damageImage'];
                       return Column(
                         children: [
                           SizedBox(
@@ -184,10 +181,8 @@ class _RequestDetailsState extends State<DoneArchivedDetailsScreen> {
                                     customTableKeyCell(
                                         text: 'Machine Image',
                                         context: context),
-                                    customTableValueCell(
-                                      text: storeDocs[widget.currentIndex]
-                                          ['machineImage'],
-                                    ),
+                                    Image.network('${storeDocs[widget.currentIndex]
+                                    ['machineImage']}'),
                                   ],
                                 ),
                                 TableRow(
@@ -195,20 +190,15 @@ class _RequestDetailsState extends State<DoneArchivedDetailsScreen> {
                                     customTableKeyCell(
                                         text: 'Machine Type Image',
                                         context: context),
-                                    customTableValueCell(
-                                      text: storeDocs[widget.currentIndex]
-                                          ['machineTypeImage'],
-                                    ),
+                                    Image.network('${storeDocs[widget.currentIndex]
+                                    ['machineTypeImage']}'),
                                   ],
                                 ),
                                 TableRow(
                                   children: [
                                     customTableKeyCell(
                                         text: 'Damage Image', context: context),
-                                    customTableValueCell(
-                                      text: storeDocs[widget.currentIndex]
-                                          ['damageImage'],
-                                    ),
+                                    Image.network('${storeDocs[widget.currentIndex]['damageImage']}'),
                                   ],
                                 ),
                                 TableRow(

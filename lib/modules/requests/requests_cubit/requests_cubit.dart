@@ -193,50 +193,6 @@ class RequestCubit extends Cubit<RequestStates>
   }
 
 
-  String? imagePath1;
-  String? imagePath2;
-  String? imagePath3;
-  void pickImage(int imageNumber) async
-  {
-    XFile? file = await ImagePicker().pickImage(source: ImageSource.camera);
-    if (file != null) {
-      switch (imageNumber) {
-        case 1:
-          imagePath1 = file.path;
-          emit(PickImageSuccessState());
-          break;
-        case 2:
-          imagePath2 = file.path;
-          emit(PickImageSuccessState());
-          break;
-        case 3:
-          imagePath3 = file.path;
-          emit(PickImageSuccessState());
-          break;
-      }
-
-     /* // Get Reference To Storage Root
-      Reference referenceRoot = FirebaseStorage.instance.ref();
-      Reference referenceDirImages = referenceRoot.child('images');
-
-      // Create Reference for the Images to be stored
-      Reference referenceImageToUpload = referenceDirImages.child(uniqueImageName);
-
-      try {
-        // Store The File
-        await referenceImageToUpload.putFile(File(imagePath!));
-        imageUrl = await referenceImageToUpload.getDownloadURL();
-
-
-      } catch (error) {
-        // Some Errors
-
-      }*/
-      //emit(PickImageSuccessState());
-    }
-  }
-
-
   IconData locationIcon = Icons.add_location_alt_outlined;
   bool isLocation = false;
   void changeLocationIcon()

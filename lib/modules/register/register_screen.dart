@@ -263,6 +263,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             {
                               return 'Please enter your email address';
                             }
+                            if(!RegExp("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value))
+                            {
+                              return 'Please Enter a Valid Email';
+                            }
                             return null;
                           },
                           prefix: Icons.email_outlined,
