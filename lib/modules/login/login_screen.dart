@@ -6,7 +6,6 @@ import '../../layout/home_layout.dart';
 import '../../shared/components/components.dart';
 import '../../shared/network/cubit/cubit.dart';
 import '../../shared/network/local/cash_helper.dart';
-import '../register/register_screen.dart';
 import 'login_cubit/login_cubit.dart';
 import 'login_cubit/login_states.dart';
 
@@ -172,34 +171,6 @@ class LoginScreen extends StatelessWidget {
                               ),
                           fallback: (context) =>
                           const Center(child: CircularProgressIndicator()),
-                        ),
-
-                        //SizedBox between Login Button and Don't have an account
-                        SizedBox(
-                          height: height * 0.02,
-                        ),
-
-                        // Row that contain Don't have an account text and Register TextButton
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Don\'t have an account?',
-                              style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                                color:
-                                AppCubit.get(context).isDark ? Colors.black : Colors.white,
-                              ),
-                            ),
-                            defaultTextButton(
-                              onPressed: () {
-                                navigateAndFinish(
-                                  context,
-                                  RegisterScreen(),
-                                );
-                              },
-                              text: 'REGISTER',
-                            ),
-                          ],
                         ),
                       ],
                     ),
